@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnGirar: Button
 
     // Valores posibles de la ruleta (números y "Jackpot")
-    private val valoresRuleta = listOf("Jackpot", "1", "2", "3", "4", "5", "6", "7", "8")
+    //private val valoresRuleta = listOf("Jackpot", "1", "2", "3", "4", "5", "6", "7", "8")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         // Animar el giro de la ruleta
         val animador = ObjectAnimator.ofFloat(ruleta, "rotation", 0f, anguloFinal.toFloat())
-        animador.duration = 3000 // Duración de 3 segundos
+        animador.duration = 5000 // Duración de 3 segundos
         animador.interpolator = DecelerateInterpolator() // Interpolador para desacelerar el giro
         animador.start()
 
@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
             val resultado = obtenerResultado(anguloResultado)
             mostrarResultado(resultado)
         }
+        cargarLetras(frase)
     }
 
     // Función que devuelve el resultado según el ángulo final
@@ -71,4 +72,32 @@ class MainActivity : AppCompatActivity() {
     private fun mostrarResultado(resultado: String) {
         Toast.makeText(this, "¡Resultado: $resultado!", Toast.LENGTH_SHORT).show()
     }
+
+    val frase = "UN GATO SE CUELA-EN UNA REUNION"
+
+    private fun cargarLetras(frase: String) {
+        val fraseCompleta = frase.toCharArray()
+        val frase1 = ArrayList<Char>()
+        val frase2 = ArrayList<Char>()
+        var mostrarString1 = ""
+        var mostrarString2 = ""
+
+        // Llenar frase1 con los primeros 16 caracteres
+        for (i in 0 until 16) {
+            frase1.add(fraseCompleta[i])  // Usar 'add' para agregar caracteres
+            mostrarString1 += frase1[i]
+        }
+
+        // Llenar frase2 con los caracteres restantes
+        for (j in 16 until fraseCompleta.size) {
+            frase2.add(fraseCompleta[j])  // Usar 'add' para agregar caracteres
+            mostrarString2 += frase2[j - 16]  // Ajustar el índice para concatenar correctamente
+        }
+
+        // Mostrar los resultados
+        Toast.makeText(this, mostrarString1, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, mostrarString2, Toast.LENGTH_SHORT).show()
+    }
+
+
 }

@@ -9,36 +9,54 @@
 
     <!-- activity_main.xml -->
 
-    <ImageView
-        android:id="@+id/ruleta"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="48dp"
-        android:src="@drawable/ruleta"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnGirar" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-73dp">
 
-    <Button
-        android:id="@+id/btnGirar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="148dp"
-        android:text="Girar Ruleta"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/ruleta"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="132dp"
+            android:src="@drawable/ruleta"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/ruleta"
-        app:layout_constraintStart_toStartOf="parent" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="67dp"
+            android:layout_height="59dp"
+            android:layout_marginStart="172dp"
+            android:layout_marginTop="204dp"
+            android:src="@drawable/flecha"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.helper.widget.Layer
+            android:id="@+id/layer"
+            android:layout_width="85dp"
+            android:layout_height="237dp"
+            android:layout_marginStart="304dp"
+            android:layout_marginTop="108dp"
+            app:constraint_referenced_ids="imageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnGirar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Girar Ruleta"
+            tools:layout_editor_absoluteX="144dp"
+            tools:layout_editor_absoluteY="53dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
