@@ -11,6 +11,7 @@
     tools:context=".MainActivity">
 
     <Button
+
         android:id="@+id/btnGirar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,224 +59,224 @@
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco1"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco2"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco3"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco4"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco5"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco6"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco7"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco8"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco9"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco10"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco11"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco12"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco13"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco14"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco15"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco16"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco17"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco18"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco19"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco20"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco21"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco22"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco23"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco24"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco25"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco26"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco27"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco28"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco29"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco30"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
         <ImageView
             android:id="@+id/hueco31"
             android:layout_width="14dp"
             android:layout_height="24dp"
             android:layout_margin="4dp"
-            android:src="@drawable/rectanguloblanco" />
+            android:src="@drawable/cuadroblanco" />
 
     </GridLayout>
 

@@ -94,13 +94,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun asignarImagenLetra(letra: Char): Int {
         return when (letra) {
-            'A' -> R.drawable.letraa
+
+            'A' -> R.drawable.letra
             //'B' -> R.drawable.letra_b
             //'C' -> R.drawable.letra_c
             //'D' -> R.drawable.letra_d
             //'E' -> R.drawable.letra_e
             //'F' -> R.drawable.letra_f
-            else -> R.drawable.letraa
+            else -> R.drawable.letra
         }
     }
 
@@ -132,7 +133,7 @@ class MainActivity : AppCompatActivity() {
         for (i in frase.indices) {
             if (frase[i] == ' ') {
                 val imageView = gridLayout.getChildAt(i) as ImageView
-                imageView.setImageResource(R.drawable.rectanguloazul)
+                imageView.setImageResource(R.drawable.cuadroazul)
             }
         }
     }
