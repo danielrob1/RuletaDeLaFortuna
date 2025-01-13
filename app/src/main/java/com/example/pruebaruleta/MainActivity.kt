@@ -4,19 +4,18 @@ import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.animation.DecelerateInterpolator
 import android.widget.Button
+import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var ruleta: ImageView
     private lateinit var btnGirar: Button
+    private lateinit var gridLayout: GridLayout
 
     // Valores posibles de la ruleta (números y "Jackpot")
     //private val valoresRuleta = listOf("Jackpot", "1", "2", "3", "4", "5", "6", "7", "8")
@@ -27,6 +26,8 @@ class MainActivity : AppCompatActivity() {
 
         ruleta = findViewById(R.id.ruleta)
         btnGirar = findViewById(R.id.btnGirar)
+        gridLayout = findViewById(R.id.gridLayout)
+        verificarEspacios()
 
         btnGirar.setOnClickListener {
             girarRuleta()
@@ -50,8 +51,9 @@ class MainActivity : AppCompatActivity() {
             val anguloResultado = anguloAleatorio % 360
             val resultado = obtenerResultado(anguloResultado)
             mostrarResultado(resultado)
+            verificarLetra('A')
         }
-        cargarLetras(frase)
+        //cargarLetras(frase)
     }
 
     // Función que devuelve el resultado según el ángulo final
@@ -75,6 +77,33 @@ class MainActivity : AppCompatActivity() {
 
     val frase = "UN GATO SE CUELA-EN UNA REUNION"
 
+    private fun verificarLetra(letra: Char) {
+        var letraEncontrada = false
+        for (i in frase.indices) {
+            if (frase[i] == letra) {
+                letraEncontrada = true
+
+                val imageView = gridLayout.getChildAt(i) as ImageView
+                imageView.setImageResource(asignarImagenLetra(letra))
+            }
+        }
+        if (!letraEncontrada) {
+            Toast.makeText(this, "La letra $letra no está en la palabra.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun asignarImagenLetra(letra: Char): Int {
+        return when (letra) {
+            'A' -> R.drawable.letraa
+            //'B' -> R.drawable.letra_b
+            //'C' -> R.drawable.letra_c
+            //'D' -> R.drawable.letra_d
+            //'E' -> R.drawable.letra_e
+            //'F' -> R.drawable.letra_f
+            else -> R.drawable.letraa
+        }
+    }
+
     private fun cargarLetras(frase: String) {
         val fraseCompleta = frase.toCharArray()
         val frase1 = ArrayList<Char>()
@@ -97,6 +126,15 @@ class MainActivity : AppCompatActivity() {
         // Mostrar los resultados
         Toast.makeText(this, mostrarString1, Toast.LENGTH_SHORT).show()
         Toast.makeText(this, mostrarString2, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun verificarEspacios() {
+        for (i in frase.indices) {
+            if (frase[i] == ' ') {
+                val imageView = gridLayout.getChildAt(i) as ImageView
+                imageView.setImageResource(R.drawable.rectanguloazul)
+            }
+        }
     }
 
 
