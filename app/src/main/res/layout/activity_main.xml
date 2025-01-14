@@ -16,19 +16,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="48dp"
         android:text="Girar Ruleta"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="67dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="132dp"
-        android:src="@drawable/flecha"
-        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,8 +26,19 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="136dp"
         android:src="@drawable/ruleta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="67dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="172dp"
+        android:layout_marginTop="96dp"
+        android:src="@drawable/flecha"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,7 +47,7 @@
         android:layout_width="429dp"
         android:layout_height="64dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="508dp"
+        android:layout_marginTop="592dp"
         android:columnCount="16"
         android:orientation="horizontal"
         android:rowCount="2"
@@ -279,6 +279,38 @@
             android:src="@drawable/cuadroblanco" />
 
     </GridLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="189dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="436dp"
+        android:text="Introduce una letra"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextText"
+        android:layout_width="78dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="484dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="216dp"
+        android:layout_marginTop="480dp"
+        android:text="Button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
