@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import kotlin.random.Random
 
-class MainActivity : AppCompatActivity() {
+class RuletaFinal: AppCompatActivity() {
 
     private lateinit var ruleta: ImageView
     private lateinit var btnGirar: Button
@@ -31,9 +31,6 @@ class MainActivity : AppCompatActivity() {
     private var anguloResultado=0
     private var resultado=""
     private var ruletaGirada=false
-
-
-
     // Valores posibles de la ruleta (números y "Jackpot")
     //private val valoresRuleta = listOf("Jackpot", "1", "2", "3", "4", "5", "6", "7", "8")
 
@@ -86,8 +83,8 @@ class MainActivity : AppCompatActivity() {
         // Mostrar el resultado cuando termina la animación
         animador.doOnEnd {
             ruletaGirada=true
-             anguloResultado = anguloAleatorio % 360
-             resultado = obtenerResultado(anguloResultado)
+            anguloResultado = anguloAleatorio % 360
+            resultado = obtenerResultado(anguloResultado)
             mostrarResultado(resultado)
 
         }
@@ -141,16 +138,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     val frase = "UN GATO SE CUELA-EN UNA REUNION"
-    val fraseSinEspacios=frase.replace(" ", "")
-    var longitudFrase=fraseSinEspacios.length
-    var letrasLevantadas=0;
 
     private fun verificarLetra(letra: Char) {
         var letraEncontrada = false
         for (i in frase.indices) {
             if (frase[i] == letra) {
                 letraEncontrada = true
-                letrasLevantadas++
                 val imageView = gridLayout.getChildAt(i) as ImageView
                 imageView.setImageResource(asignarImagenLetra(letra))
                 val valorActual = jugadores[seleccionarJugador(turnoDeJugador)] ?: 0
@@ -160,9 +153,6 @@ class MainActivity : AppCompatActivity() {
                     textViewJ1.text = jugador1 + ":  " + jugadores[jugador1]
                     textViewJ2.text = jugador2 + ":  " + jugadores[jugador2]
                     textViewJ3.text = jugador3 + ":  " + jugadores[jugador3]
-                    if(letrasLevantadas>=longitudFrase){
-                        Toast.makeText(this, "¡Has ganado!", Toast.LENGTH_SHORT).show()
-                    }
                 } else{
                     letraEncontrada=false
                 }
@@ -176,7 +166,6 @@ class MainActivity : AppCompatActivity() {
             }
             seleccionarJugador(turnoDeJugador)
         }
-
     }
 
     private fun asignarImagenLetra(letra: Char): Int {
@@ -225,6 +214,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
 }
