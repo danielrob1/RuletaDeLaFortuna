@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".MainActivity">
+    tools:context=".RuletaFinal">
 
     <ImageView
         android:id="@+id/imageView5"
@@ -20,52 +20,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/jugador1" />
 
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="24dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="76dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/jugador2" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="24dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="52dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/jugador1" />
-
-    <TextView
-        android:id="@+id/textViewJ2"
-        android:layout_width="116dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="48dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textViewJ1"
         android:layout_width="116dp"
         android:layout_height="23dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="24dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewJ3"
-        android:layout_width="116dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="72dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -378,7 +338,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="188dp"
         android:layout_marginTop="52dp"
-        android:text="TextView"
+        android:text="Panel final"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

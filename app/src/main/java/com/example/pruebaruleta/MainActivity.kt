@@ -1,6 +1,7 @@
 package com.example.pruebaruleta
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.view.animation.DecelerateInterpolator
 import android.widget.Button
@@ -24,9 +25,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var textViewJ2: TextView
     private lateinit var textViewJ3: TextView
     private lateinit var textViewTurno: TextView
-    private  var jugador1 = "Juan"
-    private  var jugador2 = "Pedro"
-    private  var jugador3 = "Maria"
+    private var jugador1 = ""
+    private var jugador2 = ""
+    private var jugador3 = ""
     private  var turnoDeJugador=1
     private var anguloResultado=0
     private var resultado=""
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         textViewJ3 = findViewById(R.id.textViewJ3)
         textViewTurno = findViewById(R.id.textViewTurno)
         verificarEspacios()
+        button.isEnabled = false
         button.setOnClickListener {
             if(ruletaGirada){
                 val letra = editTextText.text.toString().uppercase().firstOrNull()
@@ -66,10 +68,16 @@ class MainActivity : AppCompatActivity() {
         btnGirar.setOnClickListener {
             girarRuleta()
         }
-        inicializarJugadores(jugador1, jugador2, jugador3)
+         jugador1 = intent.getStringExtra("jugador1")?: ""
+         jugador2 = intent.getStringExtra("jugador2")?:""
+         jugador3 = intent.getStringExtra("jugador3")?:""
+        if (jugador1 != null && jugador2 != null && jugador3 != null) {
+            inicializarJugadores(jugador1, jugador2, jugador3)
+        }
         seleccionarJugador(turnoDeJugador)
     }
     private fun girarRuleta() {
+        btnGirar.isEnabled = false
         anguloResultado=0
         resultado=""
         // Seleccionar un valor aleatorio de giro entre 0 y 360 grados
@@ -86,10 +94,10 @@ class MainActivity : AppCompatActivity() {
         // Mostrar el resultado cuando termina la animación
         animador.doOnEnd {
             ruletaGirada=true
+            button.isEnabled = true
              anguloResultado = anguloAleatorio % 360
              resultado = obtenerResultado(anguloResultado)
             mostrarResultado(resultado)
-
         }
         //cargarLetras(frase)
     }
@@ -137,45 +145,67 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun mostrarResultado(resultado: String) {
+        if(resultado=="Jackpot"){
+            verificarLetra(' ')
+        }
         Toast.makeText(this, "¡Resultado: $resultado!", Toast.LENGTH_SHORT).show()
     }
 
-    val frase = "UN GATO SE CUELA-EN UNA REUNION"
+    val frase = "UN GATO SE CUELA EN UNA REUNION"
     val fraseSinEspacios=frase.replace(" ", "")
     var longitudFrase=fraseSinEspacios.length
     var letrasLevantadas=0;
 
     private fun verificarLetra(letra: Char) {
-        var letraEncontrada = false
-        for (i in frase.indices) {
-            if (frase[i] == letra) {
-                letraEncontrada = true
-                letrasLevantadas++
-                val imageView = gridLayout.getChildAt(i) as ImageView
-                imageView.setImageResource(asignarImagenLetra(letra))
-                val valorActual = jugadores[seleccionarJugador(turnoDeJugador)] ?: 0
-                if(resultado!="Jackpot"){
-                    var valorInt= resultado.toInt();
-                    jugadores[seleccionarJugador(turnoDeJugador)] = valorActual + valorInt
-                    textViewJ1.text = jugador1 + ":  " + jugadores[jugador1]
-                    textViewJ2.text = jugador2 + ":  " + jugadores[jugador2]
-                    textViewJ3.text = jugador3 + ":  " + jugadores[jugador3]
-                    if(letrasLevantadas>=longitudFrase){
-                        Toast.makeText(this, "¡Has ganado!", Toast.LENGTH_SHORT).show()
+        if(letra!=' '){
+            var letraEncontrada = false
+            for (i in frase.indices) {
+                if (frase[i] == letra) {
+                    letraEncontrada = true
+                    letrasLevantadas++
+                    val imageView = gridLayout.getChildAt(i) as ImageView
+                    imageView.setImageResource(asignarImagenLetra(letra))
+                    val valorActual = jugadores[seleccionarJugador(turnoDeJugador)] ?: 0
+                    if(resultado!="Jackpot"){
+                        var valorInt= resultado.toInt();
+                        jugadores[seleccionarJugador(turnoDeJugador)] = valorActual + valorInt
+                        textViewJ1.text = jugador1 + ":  " + jugadores[jugador1]
+                        textViewJ2.text = jugador2 + ":  " + jugadores[jugador2]
+                        textViewJ3.text = jugador3 + ":  " + jugadores[jugador3]
+                    } else{
+                        letraEncontrada=false
                     }
-                } else{
-                    letraEncontrada=false
                 }
             }
-        }
-        if (!letraEncontrada) {
-            Toast.makeText(this, "La letra $letra no está en la palabra.", Toast.LENGTH_SHORT).show()
+            if(letrasLevantadas>=longitudFrase){
+                val jugadorFinal1 = jugadores.maxByOrNull { it.value }
+                val jugadorFinal = jugadorFinal1?.key
+                Toast.makeText(this, "¡Has ganado, $jugadorFinal !", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, RuletaFinal::class.java)
+                if (jugadorFinal != null) {
+                    intent.putExtra("jugador", jugadorFinal)
+                }
+                startActivity(intent)
+            }
+            if (!letraEncontrada) {
+                Toast.makeText(this, "La letra $letra no está en la palabra.", Toast.LENGTH_SHORT).show()
+                turnoDeJugador++
+                if(turnoDeJugador>3){
+                    turnoDeJugador=1
+                }
+                seleccionarJugador(turnoDeJugador)
+            }
+        } else{
+            Toast.makeText(this, "Se pasa el turno al siguiente jugador", Toast.LENGTH_SHORT).show()
             turnoDeJugador++
             if(turnoDeJugador>3){
                 turnoDeJugador=1
             }
             seleccionarJugador(turnoDeJugador)
+
         }
+        btnGirar.isEnabled = true
+        button.isEnabled = false
 
     }
 

@@ -1,6 +1,7 @@
 package com.example.pruebaruleta
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.view.animation.DecelerateInterpolator
 import android.widget.Button
@@ -13,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import kotlin.random.Random
 
-class RuletaFinal: AppCompatActivity() {
+class RuletaFinal : AppCompatActivity() {
 
     private lateinit var ruleta: ImageView
     private lateinit var btnGirar: Button
@@ -21,30 +22,26 @@ class RuletaFinal: AppCompatActivity() {
     private lateinit var editTextText: EditText
     private lateinit var button: Button
     private lateinit var textViewJ1: TextView
-    private lateinit var textViewJ2: TextView
-    private lateinit var textViewJ3: TextView
     private lateinit var textViewTurno: TextView
-    private  var jugador1 = "Juan"
-    private  var jugador2 = "Pedro"
-    private  var jugador3 = "Maria"
-    private  var turnoDeJugador=1
+    private var jugador = ""
     private var anguloResultado=0
     private var resultado=""
     private var ruletaGirada=false
+
+
+
     // Valores posibles de la ruleta (números y "Jackpot")
     //private val valoresRuleta = listOf("Jackpot", "1", "2", "3", "4", "5", "6", "7", "8")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_panelfinal)
         ruleta = findViewById(R.id.ruleta)
         btnGirar = findViewById(R.id.btnGirar)
         gridLayout = findViewById(R.id.gridLayout)
         editTextText = findViewById(R.id.editTextText)
         button = findViewById(R.id.button)
         textViewJ1 = findViewById(R.id.textViewJ1)
-        textViewJ2 = findViewById(R.id.textViewJ2)
-        textViewJ3 = findViewById(R.id.textViewJ3)
         textViewTurno = findViewById(R.id.textViewTurno)
         verificarEspacios()
         button.setOnClickListener {
@@ -63,8 +60,11 @@ class RuletaFinal: AppCompatActivity() {
         btnGirar.setOnClickListener {
             girarRuleta()
         }
-        inicializarJugadores(jugador1, jugador2, jugador3)
-        seleccionarJugador(turnoDeJugador)
+        jugador = intent.getStringExtra("jugador")?: ""
+
+        if (jugador != null ) {
+            inicializarJugadores(jugador)
+        }
     }
     private fun girarRuleta() {
         anguloResultado=0
@@ -90,14 +90,8 @@ class RuletaFinal: AppCompatActivity() {
         }
         //cargarLetras(frase)
     }
-    var jugadores = HashMap<String, Int>()
-    private fun inicializarJugadores(jugador1: String, jugador2: String, jugador3: String) {
-        jugadores[jugador1] = 0
-        jugadores[jugador2] = 0
-        jugadores[jugador3] = 0
-        textViewJ1.text = jugador1 + ":  " + jugadores[jugador1]
-        textViewJ2.text = jugador2 + ":  " + jugadores[jugador2]
-        textViewJ3.text = jugador3 + ":  " + jugadores[jugador3]
+    private fun inicializarJugadores(jugador: String) {
+        textViewJ1.text = jugador
     }
     // Función que devuelve el resultado según el ángulo final
     private fun obtenerResultado(angulo: Int): String {
@@ -114,58 +108,55 @@ class RuletaFinal: AppCompatActivity() {
         }
     }
 
-    private fun seleccionarJugador(numero:Int):String{
-        var jugador = ""
-        when(numero){
-            1->{
-                textViewTurno.text="Es el turno de " + jugador1
-                jugador=jugador1
-            }
-            2->{
-                textViewTurno.text="Es el turno de " + jugador2
-                jugador=jugador2
-            }
-            3->{
-                textViewTurno.text="Es el turno de " + jugador3
-                jugador=jugador3
-            }
-        }
-        return jugador
-    }
+    /**
+     *  private fun seleccionarJugador(numero:Int):String{
+     *         var jugador = ""
+     *         when(numero){
+     *             1->{
+     *                 textViewTurno.text="Es el turno de " + jugador
+     *                 jugador=jugador1
+     *             }
+     *             2->{
+     *                 textViewTurno.text="Es el turno de " + jugador2
+     *                 jugador=jugador2
+     *             }
+     *             3->{
+     *                 textViewTurno.text="Es el turno de " + jugador3
+     *                 jugador=jugador3
+     *             }
+     *         }
+     *         return jugador
+     *     }
+     */
+
 
     private fun mostrarResultado(resultado: String) {
+        if(resultado=="Jackpot"){
+            verificarLetra(' ')
+        }
         Toast.makeText(this, "¡Resultado: $resultado!", Toast.LENGTH_SHORT).show()
     }
 
-    val frase = "UN GATO SE CUELA-EN UNA REUNION"
+    val frase = "UN GATO SE CUELA EN UNA REUNION"
+    val fraseSinEspacios=frase.replace(" ", "")
+    var longitudFrase=fraseSinEspacios.length
+    var letrasLevantadas=0;
 
     private fun verificarLetra(letra: Char) {
-        var letraEncontrada = false
-        for (i in frase.indices) {
-            if (frase[i] == letra) {
-                letraEncontrada = true
-                val imageView = gridLayout.getChildAt(i) as ImageView
-                imageView.setImageResource(asignarImagenLetra(letra))
-                val valorActual = jugadores[seleccionarJugador(turnoDeJugador)] ?: 0
-                if(resultado!="Jackpot"){
-                    var valorInt= resultado.toInt();
-                    jugadores[seleccionarJugador(turnoDeJugador)] = valorActual + valorInt
-                    textViewJ1.text = jugador1 + ":  " + jugadores[jugador1]
-                    textViewJ2.text = jugador2 + ":  " + jugadores[jugador2]
-                    textViewJ3.text = jugador3 + ":  " + jugadores[jugador3]
-                } else{
-                    letraEncontrada=false
+
+            var letraEncontrada = false
+            for (i in frase.indices) {
+                if (frase[i] == letra) {
+                    letraEncontrada = true
+                    letrasLevantadas++
+                    val imageView = gridLayout.getChildAt(i) as ImageView
+                    imageView.setImageResource(asignarImagenLetra(letra))
                 }
             }
-        }
-        if (!letraEncontrada) {
-            Toast.makeText(this, "La letra $letra no está en la palabra.", Toast.LENGTH_SHORT).show()
-            turnoDeJugador++
-            if(turnoDeJugador>3){
-                turnoDeJugador=1
+            if (!letraEncontrada) {
+                Toast.makeText(this, "La letra $letra no está en la palabra.", Toast.LENGTH_SHORT).show()
             }
-            seleccionarJugador(turnoDeJugador)
-        }
+
     }
 
     private fun asignarImagenLetra(letra: Char): Int {
@@ -214,5 +205,6 @@ class RuletaFinal: AppCompatActivity() {
             }
         }
     }
+
 
 }
