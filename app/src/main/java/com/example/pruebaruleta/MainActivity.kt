@@ -12,9 +12,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.random.Random
+import com.example.pruebaruleta.FraseDatabase.*
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var  db: FraseDatabase
+    private lateinit var fraseDao: FraseDao
 
     private lateinit var ruleta: ImageView
     private lateinit var btnGirar: Button
@@ -32,6 +39,15 @@ class MainActivity : AppCompatActivity() {
     private var anguloResultado=0
     private var resultado=""
     private var ruletaGirada=false
+    private lateinit var textviewPrueba: TextView
+    private lateinit var frases: List<Frase>
+    private lateinit var textviewprueba2: TextView
+    private lateinit var frase: String
+    private lateinit var fraseSinEspacios: String
+    private  var longitudFrase=0
+    private  var letrasLevantadas=0
+
+
 
 
 
@@ -39,6 +55,8 @@ class MainActivity : AppCompatActivity() {
     //private val valoresRuleta = listOf("Jackpot", "1", "2", "3", "4", "5", "6", "7", "8")
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        db = FraseDatabase.getDatabase(this)
+        fraseDao= db.fraseDao()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         ruleta = findViewById(R.id.ruleta)
@@ -50,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         textViewJ2 = findViewById(R.id.textViewJ2)
         textViewJ3 = findViewById(R.id.textViewJ3)
         textViewTurno = findViewById(R.id.textViewTurno)
-        verificarEspacios()
+        textviewprueba2 = findViewById(R.id.textView4)
         button.isEnabled = false
         button.setOnClickListener {
             if(ruletaGirada){
@@ -75,6 +93,32 @@ class MainActivity : AppCompatActivity() {
             inicializarJugadores(jugador1, jugador2, jugador3)
         }
         seleccionarJugador(turnoDeJugador)
+        CoroutineScope(Dispatchers.IO).launch {
+            frases = fraseDao.obtenerTodasLasFrases()
+            withContext(Dispatchers.Main) {
+                if (frases.isNotEmpty()) {
+                    val aleatorio = Random.nextInt(0, frases.size)
+                    frase = frases[aleatorio].frase
+                    fraseSinEspacios = frase.replace(" ", "")
+                     longitudFrase = fraseSinEspacios.length
+                     letrasLevantadas = 0
+                    textviewprueba2.text = frase
+                    verificarEspacios()
+                } else {
+                    Toast.makeText(this@MainActivity, "No se encontraron frases en la base de datos", Toast.LENGTH_SHORT).show()
+                }
+            }
+            val textoCompleto = StringBuilder()
+            /**
+             *  frases.forEach {
+             *                 textoCompleto.append("Categoría: ${it.categoria}, Frase: ${it.frase}\n")
+             *             }
+             *             withContext(Dispatchers.Main) {
+             *                 textviewPrueba.text = textoCompleto.toString()
+             *             }
+             */
+        }
+
     }
     private fun girarRuleta() {
         btnGirar.isEnabled = false
@@ -151,10 +195,11 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "¡Resultado: $resultado!", Toast.LENGTH_SHORT).show()
     }
 
-    val frase = "UN GATO SE CUELA EN UNA REUNION"
-    val fraseSinEspacios=frase.replace(" ", "")
-    var longitudFrase=fraseSinEspacios.length
-    var letrasLevantadas=0;
+
+    private fun generarFrase() {
+        textviewprueba2.text=frase
+    }
+
 
     private fun verificarLetra(letra: Char) {
         if(letra!=' '){
