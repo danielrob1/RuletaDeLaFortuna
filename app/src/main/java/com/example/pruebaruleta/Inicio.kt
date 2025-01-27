@@ -33,6 +33,9 @@ class Inicio: AppCompatActivity() {
             if (editTextJ3.text.toString().isEmpty()) {
                 intent.putExtra("jugador3", "Jugador 3")
                 startActivity(intent)
+            } else{
+                intent.putExtra("jugador3", editTextJ3.text.toString())
+                startActivity(intent)
             }
         }
     }

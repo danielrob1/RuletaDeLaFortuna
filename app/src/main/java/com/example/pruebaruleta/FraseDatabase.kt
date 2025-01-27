@@ -11,10 +11,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [Frase::class], version = 1)
+@Database(entities = [Frase::class, Historial::class], version = 2) // Incrementa la versión
 abstract class FraseDatabase : RoomDatabase() {
 
     abstract fun fraseDao(): FraseDao
+    abstract fun historialDao(): HistorialDao // Agrega el DAO
 
     companion object {
         @Volatile
@@ -27,7 +28,8 @@ abstract class FraseDatabase : RoomDatabase() {
                     FraseDatabase::class.java,
                     "frase_database"
                 )
-                    .addCallback(PrepopulateCallback(context))
+                    .fallbackToDestructiveMigration() // Habilitar recreación de la base de datos
+                    .addCallback(PrepopulateCallback(context)) // Cargar frases desde el JSON
                     .build()
                 INSTANCE = instance
                 instance

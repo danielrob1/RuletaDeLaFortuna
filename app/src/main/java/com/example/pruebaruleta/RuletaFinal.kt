@@ -1,7 +1,6 @@
 package com.example.pruebaruleta
 
 import android.animation.ObjectAnimator
-import android.content.Intent
 import android.os.Bundle
 import android.view.animation.DecelerateInterpolator
 import android.widget.Button
@@ -23,11 +22,13 @@ class RuletaFinal : AppCompatActivity() {
     private lateinit var button: Button
     private lateinit var textViewJ1: TextView
     private lateinit var textViewTurno: TextView
-    private var jugador = ""
-    private var anguloResultado=0
-    private var resultado=""
-    private var ruletaGirada=false
-
+    private var jugadorFinal = ""
+    private var puntosJugadorFinal = 0
+    private lateinit var jugadoresRestantes: List<String>
+    private lateinit var puntosRestantes: List<Int>
+    private var anguloResultado = 0
+    private var resultado = ""
+    private var ruletaGirada = false
 
 
     // Valores posibles de la ruleta (números y "Jackpot")
@@ -45,27 +46,56 @@ class RuletaFinal : AppCompatActivity() {
         textViewTurno = findViewById(R.id.textViewTurno)
         verificarEspacios()
         button.setOnClickListener {
-            if(ruletaGirada){
-                val letra = editTextText.text.toString().uppercase().firstOrNull()
-                if (letra != null) {
-                    verificarLetra(letra)
+                var letra = editTextText.text.toString().uppercase()
+                var letras= letra.split(" ")
+                var contadorVocales=0
+                for (vocal in letras){
+                    if(vocal.equals('A') || vocal.equals('E') || vocal.equals('I') || vocal.equals('O') || vocal.equals('U')){
+                        contadorVocales++
+                    }
                 }
-            } else{
-                Toast.makeText(this, "La ruleta no se ha girado", Toast.LENGTH_SHORT).show()
+                if (letra != null && letras.size==4 && contadorVocales==1) {
+                    for(letra in letras){
+                        verificarLetra(letra.first())
+                    }
+                } else {
+                    if(letras.size!=4){
+                        Toast.makeText(this, "Introduce 4 palabras", Toast.LENGTH_SHORT).show()
+                    }
+                    if(contadorVocales!=1){
+                        Toast.makeText(this, "Introduce solo una vocal", Toast.LENGTH_SHORT).show()
+                        if(letras==null){
+                            Toast.makeText(this, "Introduce una letra", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                Toast.makeText(this, "Error en el formato", Toast.LENGTH_SHORT).show()
             }
-            ruletaGirada=false
+            ruletaGirada = false
             editTextText.text.clear()
+            contadorVocales=0
+            letras= emptyList()
+            letra = ""
 
         }
         btnGirar.setOnClickListener {
             girarRuleta()
         }
-        jugador = intent.getStringExtra("jugador")?: ""
+        jugadorFinal = intent.getStringExtra("jugadorFinal") ?: ""
+        puntosJugadorFinal = intent.getIntExtra("puntosJugadorFinal", 0)
+        jugadoresRestantes = intent.getStringArrayListExtra("nombresRestantes") ?: emptyList()
+        puntosRestantes = intent.getIntegerArrayListExtra("puntosRestantes") ?: emptyList()
 
-        if (jugador != null ) {
-            inicializarJugadores(jugador)
+        if (jugadorFinal != null) {
+            inicializarJugadores(jugadorFinal)
         }
     }
+
+    val frase = "UN GATO SE CUELA EN UNA REUNION"
+    var letrasIniciales = listOf('R','S','F','O')
+
+    val fraseSinEspacios=frase.replace(" ", "")
+    var longitudFrase=fraseSinEspacios.length
+    var letrasLevantadas=0;
     private fun girarRuleta() {
         anguloResultado=0
         resultado=""
@@ -86,7 +116,9 @@ class RuletaFinal : AppCompatActivity() {
             anguloResultado = anguloAleatorio % 360
             resultado = obtenerResultado(anguloResultado)
             mostrarResultado(resultado)
-
+            for (letra in letrasIniciales) {
+                verificarLetra(letra)
+            }
         }
         //cargarLetras(frase)
     }
@@ -137,13 +169,9 @@ class RuletaFinal : AppCompatActivity() {
         Toast.makeText(this, "¡Resultado: $resultado!", Toast.LENGTH_SHORT).show()
     }
 
-    val frase = "UN GATO SE CUELA EN UNA REUNION"
-    val fraseSinEspacios=frase.replace(" ", "")
-    var longitudFrase=fraseSinEspacios.length
-    var letrasLevantadas=0;
+
 
     private fun verificarLetra(letra: Char) {
-
             var letraEncontrada = false
             for (i in frase.indices) {
                 if (frase[i] == letra) {
@@ -156,9 +184,7 @@ class RuletaFinal : AppCompatActivity() {
             if (!letraEncontrada) {
                 Toast.makeText(this, "La letra $letra no está en la palabra.", Toast.LENGTH_SHORT).show()
             }
-
     }
-
     private fun asignarImagenLetra(letra: Char): Int {
         return when (letra) {
 

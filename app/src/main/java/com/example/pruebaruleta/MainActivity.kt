@@ -223,13 +223,29 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             if(letrasLevantadas>=longitudFrase){
-                val jugadorFinal1 = jugadores.maxByOrNull { it.value }
-                val jugadorFinal = jugadorFinal1?.key
-                Toast.makeText(this, "¡Has ganado, $jugadorFinal !", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, RuletaFinal::class.java)
-                if (jugadorFinal != null) {
-                    intent.putExtra("jugador", jugadorFinal)
+                // Obtener el jugador con más puntos (jugadorFinal)
+                val jugadorFinalEntry = jugadores.maxByOrNull { it.value }
+                val jugadorFinal = jugadorFinalEntry?.key
+                val puntosJugadorFinal = jugadorFinalEntry?.value
+// Crear una lista de jugadores restantes excluyendo al jugador final
+                val jugadoresRestantes = jugadores.toMutableMap().apply {
+                    if (jugadorFinal != null) {
+                        this.remove(jugadorFinal) // Eliminar al jugador final del mapa
+                    }
                 }
+// Crear un Intent para enviar los datos a la nueva actividad
+                val intent = Intent(this, RuletaFinal::class.java)
+// Agregar el jugador final al Intent
+                if (jugadorFinal != null && puntosJugadorFinal != null) {
+                    intent.putExtra("jugadorFinal", jugadorFinal)
+                    intent.putExtra("puntosJugadorFinal", puntosJugadorFinal)
+                }
+// Agregar los jugadores restantes al Intent
+                val nombresRestantes = jugadoresRestantes.keys.toList()
+                val puntosRestantes = jugadoresRestantes.values.toList()
+                intent.putStringArrayListExtra("nombresRestantes", ArrayList(nombresRestantes))
+                intent.putIntegerArrayListExtra("puntosRestantes", ArrayList(puntosRestantes))
+// Iniciar la nueva actividad
                 startActivity(intent)
             }
             if (!letraEncontrada) {
