@@ -23,6 +23,8 @@
         </activity>
         <activity android:name=".MainActivity"/>
         <activity android:name=".RuletaFinal"/>
+        <activity android:name=".PantallaFinal"/>
+        <activity android:name=".VerHistorial"/>
     </application>
 
 </manifest>

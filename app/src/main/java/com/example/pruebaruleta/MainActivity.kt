@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var textViewJ2: TextView
     private lateinit var textViewJ3: TextView
     private lateinit var textViewTurno: TextView
+    private lateinit var btnResolver: Button
     private var jugador1 = ""
     private var jugador2 = ""
     private var jugador3 = ""
@@ -69,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         textViewJ3 = findViewById(R.id.textViewJ3)
         textViewTurno = findViewById(R.id.textViewTurno)
         textviewprueba2 = findViewById(R.id.textView4)
+        btnResolver = findViewById(R.id.btnResolver)
         button.isEnabled = false
         button.setOnClickListener {
             if(ruletaGirada){
@@ -98,10 +100,11 @@ class MainActivity : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 if (frases.isNotEmpty()) {
                     val aleatorio = Random.nextInt(0, frases.size)
-                    frase = frases[aleatorio].frase
+                    frase="UN GATO SE CUELA EN UNA REUNION"
+                    //frase = frases[aleatorio].frase
                     fraseSinEspacios = frase.replace(" ", "")
-                     longitudFrase = fraseSinEspacios.length
-                     letrasLevantadas = 0
+                    longitudFrase = fraseSinEspacios.length
+                    letrasLevantadas = 0
                     textviewprueba2.text = frase
                     verificarEspacios()
                 } else {
@@ -117,6 +120,9 @@ class MainActivity : AppCompatActivity() {
              *                 textviewPrueba.text = textoCompleto.toString()
              *             }
              */
+        }
+        btnResolver.setOnClickListener {
+            resolverFrase()
         }
 
     }
@@ -223,30 +229,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             if(letrasLevantadas>=longitudFrase){
-                // Obtener el jugador con más puntos (jugadorFinal)
-                val jugadorFinalEntry = jugadores.maxByOrNull { it.value }
-                val jugadorFinal = jugadorFinalEntry?.key
-                val puntosJugadorFinal = jugadorFinalEntry?.value
-// Crear una lista de jugadores restantes excluyendo al jugador final
-                val jugadoresRestantes = jugadores.toMutableMap().apply {
-                    if (jugadorFinal != null) {
-                        this.remove(jugadorFinal) // Eliminar al jugador final del mapa
-                    }
-                }
-// Crear un Intent para enviar los datos a la nueva actividad
-                val intent = Intent(this, RuletaFinal::class.java)
-// Agregar el jugador final al Intent
-                if (jugadorFinal != null && puntosJugadorFinal != null) {
-                    intent.putExtra("jugadorFinal", jugadorFinal)
-                    intent.putExtra("puntosJugadorFinal", puntosJugadorFinal)
-                }
-// Agregar los jugadores restantes al Intent
-                val nombresRestantes = jugadoresRestantes.keys.toList()
-                val puntosRestantes = jugadoresRestantes.values.toList()
-                intent.putStringArrayListExtra("nombresRestantes", ArrayList(nombresRestantes))
-                intent.putIntegerArrayListExtra("puntosRestantes", ArrayList(puntosRestantes))
-// Iniciar la nueva actividad
-                startActivity(intent)
+                irARuletaFinal()
             }
             if (!letraEncontrada) {
                 Toast.makeText(this, "La letra $letra no está en la palabra.", Toast.LENGTH_SHORT).show()
@@ -315,6 +298,51 @@ class MainActivity : AppCompatActivity() {
                 imageView.setImageResource(R.drawable.cuadroazul)
             }
         }
+    }
+    private fun resolverFrase() {
+        val editTextFrase = EditText(this)
+        editTextFrase.hint = "Introduce la frase completa"
+        val dialog = androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("Comprobar frase")
+            .setMessage("Introduce la frase completa para comprobar si has acertado:")
+            .setView(editTextFrase) // Añadir el EditText al diálogo
+            .setPositiveButton("Comprobar") { _, _ ->
+                val fraseIntroducida = editTextFrase.text.toString().uppercase()
+                // Comprobar si la frase introducida coincide con la solución
+                if (fraseIntroducida == frase) {
+                    Toast.makeText(this, "¡Correcto! Has acertado la frase.", Toast.LENGTH_LONG).show()
+                    irARuletaFinal()
+                } else {
+                    Toast.makeText(this, "Incorrecto, la frase era $frase", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("Cancelar") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+        dialog.show()
+    }
+    private fun irARuletaFinal(){
+        // Obtener el jugador con más puntos (jugadorFinal)
+        val jugadorFinalEntry = jugadores.maxByOrNull { it.value }
+        val jugadorFinal = jugadorFinalEntry?.key
+        val puntosJugadorFinal = jugadorFinalEntry?.value
+        val jugadoresRestantes = jugadores.toMutableMap().apply {
+            if (jugadorFinal != null) {
+                this.remove(jugadorFinal)
+            }
+        }
+        val intent = Intent(this, RuletaFinal::class.java)
+        if (jugadorFinal != null && puntosJugadorFinal != null) {
+            intent.putExtra("jugadorFinal", jugadorFinal)
+            intent.putExtra("puntosJugadorFinal", puntosJugadorFinal)
+        }
+        val nombresRestantes = jugadoresRestantes.keys.toList()
+        val puntosRestantes = jugadoresRestantes.values.toList()
+        intent.putStringArrayListExtra("nombresRestantes", ArrayList(nombresRestantes))
+        intent.putIntegerArrayListExtra("puntosRestantes", ArrayList(puntosRestantes))
+        intent.putExtra("jugadores", jugadores)
+        startActivity(intent)
     }
 
 

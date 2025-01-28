@@ -1,6 +1,7 @@
 package com.example.pruebaruleta
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.view.animation.DecelerateInterpolator
 import android.widget.Button
@@ -22,10 +23,12 @@ class RuletaFinal : AppCompatActivity() {
     private lateinit var button: Button
     private lateinit var textViewJ1: TextView
     private lateinit var textViewTurno: TextView
+    private lateinit var btnResolver: Button
     private var jugadorFinal = ""
     private var puntosJugadorFinal = 0
     private lateinit var jugadoresRestantes: List<String>
     private lateinit var puntosRestantes: List<Int>
+    private lateinit var jugadores: HashMap<String, Int>
     private var anguloResultado = 0
     private var resultado = ""
     private var ruletaGirada = false
@@ -44,39 +47,44 @@ class RuletaFinal : AppCompatActivity() {
         button = findViewById(R.id.button)
         textViewJ1 = findViewById(R.id.textViewJ1)
         textViewTurno = findViewById(R.id.textViewTurno)
+        btnResolver = findViewById(R.id.btnResolver)
         verificarEspacios()
         button.setOnClickListener {
-                var letra = editTextText.text.toString().uppercase()
-                var letras= letra.split(" ")
-                var contadorVocales=0
-                for (vocal in letras){
-                    if(vocal.equals('A') || vocal.equals('E') || vocal.equals('I') || vocal.equals('O') || vocal.equals('U')){
-                        contadorVocales++
-                    }
+            var letra = editTextText.text.toString().uppercase()
+            var letras = letra.split(" ")
+            var contadorVocales = 0
+
+            // Contar las vocales en la entrada
+            for (vocal in letras) {
+                if (vocal == "A" || vocal == "E" || vocal == "I" || vocal == "O" || vocal == "U") {
+                    contadorVocales++
                 }
-                if (letra != null && letras.size==4 && contadorVocales==1) {
-                    for(letra in letras){
-                        verificarLetra(letra.first())
-                    }
-                } else {
-                    if(letras.size!=4){
-                        Toast.makeText(this, "Introduce 4 palabras", Toast.LENGTH_SHORT).show()
-                    }
-                    if(contadorVocales!=1){
-                        Toast.makeText(this, "Introduce solo una vocal", Toast.LENGTH_SHORT).show()
-                        if(letras==null){
-                            Toast.makeText(this, "Introduce una letra", Toast.LENGTH_SHORT).show()
-                        }
-                    }
+            }
+
+            // Verificar el formato
+            if (letra.isNotEmpty() && letras.size == 4 && contadorVocales == 1) {
+                for (letra in letras) {
+                    verificarLetra(letra.first()) // Procesar las letras si el formato es correcto
+                }
+            } else {
+                // Mostrar mensajes de error dependiendo del problema
+                if (letras.size != 4) {
+                    Toast.makeText(this, "Introduce 4 palabras", Toast.LENGTH_SHORT).show()
+                }
+                if (contadorVocales != 1) {
+                    Toast.makeText(this, "Introduce solo una vocal", Toast.LENGTH_SHORT).show()
+                }
+                if (letras.isEmpty()) {
+                    Toast.makeText(this, "Introduce una letra", Toast.LENGTH_SHORT).show()
+                }
                 Toast.makeText(this, "Error en el formato", Toast.LENGTH_SHORT).show()
             }
+
+            // Reiniciar variables al final
             ruletaGirada = false
             editTextText.text.clear()
-            contadorVocales=0
-            letras= emptyList()
-            letra = ""
-
         }
+
         btnGirar.setOnClickListener {
             girarRuleta()
         }
@@ -84,6 +92,7 @@ class RuletaFinal : AppCompatActivity() {
         puntosJugadorFinal = intent.getIntExtra("puntosJugadorFinal", 0)
         jugadoresRestantes = intent.getStringArrayListExtra("nombresRestantes") ?: emptyList()
         puntosRestantes = intent.getIntegerArrayListExtra("puntosRestantes") ?: emptyList()
+        jugadores = intent.getSerializableExtra("jugadores") as HashMap<String, Int>
 
         if (jugadorFinal != null) {
             inicializarJugadores(jugadorFinal)
@@ -121,6 +130,39 @@ class RuletaFinal : AppCompatActivity() {
             }
         }
         //cargarLetras(frase)
+        btnResolver.setOnClickListener {
+            resolverFrase()
+        }
+
+
+    }
+    private fun resolverFrase() {
+        // Crear un EditText para que el usuario introduzca la frase
+        val editTextFrase = EditText(this)
+        editTextFrase.hint = "Introduce la frase completa"
+        // Construir el AlertDialog
+        val dialog = androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("Comprobar frase")
+            .setMessage("Introduce la frase completa para comprobar si has acertado:")
+            .setView(editTextFrase) // Añadir el EditText al diálogo
+            .setPositiveButton("Comprobar") { _, _ ->
+                val fraseIntroducida = editTextFrase.text.toString().uppercase()
+                // Comprobar si la frase introducida coincide con la solución
+                if (fraseIntroducida == frase) {
+                    Toast.makeText(this, "¡Correcto! Has acertado la frase.", Toast.LENGTH_LONG).show()
+                    irAPantallaFinal(true)
+                } else {
+                    Toast.makeText(this, "Incorrecto, la frase era $frase", Toast.LENGTH_SHORT).show()
+                    irAPantallaFinal(false)
+                }
+            }
+            .setNegativeButton("Cancelar") { dialog, _ ->
+                dialog.dismiss() // Cerrar el diálogo si el usuario cancela
+            }
+            .create()
+
+        // Mostrar el diálogo
+        dialog.show()
     }
     private fun inicializarJugadores(jugador: String) {
         textViewJ1.text = jugador
@@ -161,7 +203,18 @@ class RuletaFinal : AppCompatActivity() {
      *     }
      */
 
-
+    private fun irAPantallaFinal(haGanado: Boolean) {
+        val intent = Intent(this, PantallaFinal::class.java).apply {
+            putExtra("jugadorFinal", jugadorFinal)
+            putExtra("haGanado", haGanado)
+            putExtra("puntosJugadorFinal", puntosJugadorFinal)
+            putStringArrayListExtra("jugadoresRestantes", ArrayList(jugadoresRestantes))
+            putIntegerArrayListExtra("puntosRestantes", ArrayList(puntosRestantes))
+            putExtra("jugadores", jugadores)
+        }
+        startActivity(intent)
+        finish() // Cierra la actividad actual
+    }
     private fun mostrarResultado(resultado: String) {
         if(resultado=="Jackpot"){
             verificarLetra(' ')
