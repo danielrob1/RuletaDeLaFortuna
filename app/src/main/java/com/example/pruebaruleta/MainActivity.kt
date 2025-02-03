@@ -2,6 +2,7 @@ package com.example.pruebaruleta
 
 import android.animation.ObjectAnimator
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.animation.DecelerateInterpolator
 import android.widget.Button
@@ -68,7 +69,6 @@ class MainActivity : AppCompatActivity() {
         textViewJ1 = findViewById(R.id.textViewJ1)
         textViewJ2 = findViewById(R.id.textViewJ2)
         textViewJ3 = findViewById(R.id.textViewJ3)
-        textViewTurno = findViewById(R.id.textViewTurno)
         textviewprueba2 = findViewById(R.id.textView4)
         btnResolver = findViewById(R.id.btnResolver)
         button.isEnabled = false
@@ -179,15 +179,27 @@ class MainActivity : AppCompatActivity() {
         var jugador = ""
         when(numero){
             1->{
-                textViewTurno.text="Es el turno de " + jugador1
+                textViewJ1.setBackgroundColor(Color.parseColor("#D67F45"))
+                textViewJ1.setTextColor(Color.WHITE)
+                textViewJ3.setBackgroundColor(Color.parseColor("#FAE3C6"))
+                textViewJ3.setTextColor(Color.parseColor("#D67F45"))
+                textViewJ3.setTypeface(null, android.graphics.Typeface.BOLD)
                 jugador=jugador1
             }
             2->{
-                textViewTurno.text="Es el turno de " + jugador2
+                textViewJ2.setBackgroundColor(Color.parseColor("#D67F45"))
+                textViewJ2.setTextColor(Color.WHITE)
+                textViewJ1.setBackgroundColor(Color.parseColor("#FAE3C6"))
+                textViewJ1.setTextColor(Color.parseColor("#D67F45"))
+                textViewJ1.setTypeface(null, android.graphics.Typeface.BOLD)
                 jugador=jugador2
             }
             3->{
-                textViewTurno.text="Es el turno de " + jugador3
+                textViewJ3.setBackgroundColor(Color.parseColor("#D67F45"))
+                textViewJ3.setTextColor(Color.WHITE)
+                textViewJ2.setBackgroundColor(Color.parseColor("#FAE3C6"))
+                textViewJ2.setTextColor(Color.parseColor("#D67F45"))
+                textViewJ2.setTypeface(null, android.graphics.Typeface.BOLD)
                 jugador=jugador3
             }
         }
@@ -301,6 +313,8 @@ class MainActivity : AppCompatActivity() {
     }
     private fun resolverFrase() {
         val editTextFrase = EditText(this)
+        editTextFrase.gravity = android.view.Gravity.CENTER
+        editTextFrase.setTextColor(Color.BLACK)
         editTextFrase.hint = "Introduce la frase completa"
         val dialog = androidx.appcompat.app.AlertDialog.Builder(this)
             .setTitle("Comprobar frase")

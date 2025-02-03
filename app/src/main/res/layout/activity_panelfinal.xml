@@ -10,22 +10,14 @@
     android:gravity="center"
     tools:context=".RuletaFinal">
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="24dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/jugador1" />
-
     <TextView
         android:id="@+id/textViewJ1"
         android:layout_width="116dp"
         android:layout_height="23dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="160dp"
         android:layout_marginTop="24dp"
+        android:background="#D67F45"
+        android:gravity="center"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -331,16 +323,6 @@
             android:src="@drawable/cuadroblanco" />
 
     </GridLayout>
-
-    <TextView
-        android:id="@+id/textViewTurno"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="188dp"
-        android:layout_marginTop="52dp"
-        android:text="Panel final"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnResolver"

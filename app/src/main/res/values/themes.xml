@@ -2,8 +2,12 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.PruebaRuleta" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">#D67F45</item>
     </style>
 
-    <style name="Theme.PruebaRuleta" parent="Base.Theme.PruebaRuleta" />
+    <style name="Theme.PruebaRuleta" parent="Base.Theme.PruebaRuleta" >
+    <item name="android:windowBackground">#1B2C44</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:editTextColor">@color/white</item>
+    </style>
 </resources>

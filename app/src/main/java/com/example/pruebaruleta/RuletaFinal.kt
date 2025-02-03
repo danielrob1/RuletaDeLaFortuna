@@ -34,6 +34,7 @@ class RuletaFinal : AppCompatActivity() {
     private var ruletaGirada = false
 
 
+
     // Valores posibles de la ruleta (números y "Jackpot")
     //private val valoresRuleta = listOf("Jackpot", "1", "2", "3", "4", "5", "6", "7", "8")
 
@@ -46,10 +47,11 @@ class RuletaFinal : AppCompatActivity() {
         editTextText = findViewById(R.id.editTextText)
         button = findViewById(R.id.button)
         textViewJ1 = findViewById(R.id.textViewJ1)
-        textViewTurno = findViewById(R.id.textViewTurno)
         btnResolver = findViewById(R.id.btnResolver)
         verificarEspacios()
+        button.isEnabled = false
         button.setOnClickListener {
+            button.isEnabled = false
             var letra = editTextText.text.toString().uppercase()
             var letras = letra.split(" ")
             var contadorVocales = 0
@@ -106,6 +108,7 @@ class RuletaFinal : AppCompatActivity() {
     var longitudFrase=fraseSinEspacios.length
     var letrasLevantadas=0;
     private fun girarRuleta() {
+        btnGirar.isEnabled = false
         anguloResultado=0
         resultado=""
         // Seleccionar un valor aleatorio de giro entre 0 y 360 grados
@@ -122,6 +125,7 @@ class RuletaFinal : AppCompatActivity() {
         // Mostrar el resultado cuando termina la animación
         animador.doOnEnd {
             ruletaGirada=true
+            button.isEnabled = true
             anguloResultado = anguloAleatorio % 360
             resultado = obtenerResultado(anguloResultado)
             mostrarResultado(resultado)
