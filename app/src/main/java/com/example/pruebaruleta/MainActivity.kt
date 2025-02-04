@@ -23,10 +23,9 @@ import kotlinx.coroutines.withContext
 class MainActivity : AppCompatActivity() {
     private lateinit var  db: FraseDatabase
     private lateinit var fraseDao: FraseDao
-
     private lateinit var ruleta: ImageView
     private lateinit var btnGirar: Button
-    private lateinit var gridLayout: GridLayout
+    private  var panel:MutableList<ImageView> = mutableListOf()
     private lateinit var editTextText: EditText
     private lateinit var button: Button
     private lateinit var textViewJ1: TextView
@@ -63,7 +62,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         ruleta = findViewById(R.id.ruleta)
         btnGirar = findViewById(R.id.btnGirar)
-        gridLayout = findViewById(R.id.gridLayout)
         editTextText = findViewById(R.id.editTextText)
         button = findViewById(R.id.button)
         textViewJ1 = findViewById(R.id.textViewJ1)
@@ -72,6 +70,13 @@ class MainActivity : AppCompatActivity() {
         textviewprueba2 = findViewById(R.id.textView4)
         btnResolver = findViewById(R.id.btnResolver)
         button.isEnabled = false
+
+
+        for (i in 0..31) {
+            val id = resources.getIdentifier("hueco$i", "id", packageName)
+            val imageView = findViewById<ImageView>(id)
+            panel.add(imageView)
+        }
         button.setOnClickListener {
             if(ruletaGirada){
                 val letra = editTextText.text.toString().uppercase().firstOrNull()
@@ -226,7 +231,7 @@ class MainActivity : AppCompatActivity() {
                 if (frase[i] == letra) {
                     letraEncontrada = true
                     letrasLevantadas++
-                    val imageView = gridLayout.getChildAt(i) as ImageView
+                    val imageView = panel[i]
                     imageView.setImageResource(asignarImagenLetra(letra))
                     val valorActual = jugadores[seleccionarJugador(turnoDeJugador)] ?: 0
                     if(resultado!="Jackpot"){
@@ -267,15 +272,34 @@ class MainActivity : AppCompatActivity() {
 
     private fun asignarImagenLetra(letra: Char): Int {
         return when (letra) {
-
-            'A' -> R.drawable.letra
-            'U'-> R.drawable.u
-            //'B' -> R.drawable.letra_b
-            //'C' -> R.drawable.letra_c
-            //'D' -> R.drawable.letra_d
-            //'E' -> R.drawable.letra_e
-            //'F' -> R.drawable.letra_f
-            else -> R.drawable.letra
+            'A' -> R.drawable.a
+            'B' -> R.drawable.b
+            'C' -> R.drawable.c
+            'D' -> R.drawable.d
+            'E' -> R.drawable.e
+            'F' -> R.drawable.f
+            'G' -> R.drawable.g
+            'H' -> R.drawable.h
+            'I' -> R.drawable.i
+            'J' -> R.drawable.j
+            'K' -> R.drawable.k
+            'L' -> R.drawable.l
+            'M' -> R.drawable.m
+            'N' -> R.drawable.n
+            'Ñ' -> R.drawable.nn
+            'O' -> R.drawable.o
+            'P' -> R.drawable.p
+           // 'Q' -> R.drawable.q
+            'R' -> R.drawable.r
+            'S' -> R.drawable.s
+            'T' -> R.drawable.t
+            'U' -> R.drawable.u
+            'V' -> R.drawable.v
+            'W' -> R.drawable.w
+            'X' -> R.drawable.x
+            'Y' -> R.drawable.y
+            'Z' -> R.drawable.z
+            else -> R.drawable.cuadroblanco // Default image for unknown characters
         }
     }
 
@@ -306,7 +330,7 @@ class MainActivity : AppCompatActivity() {
     private fun verificarEspacios() {
         for (i in frase.indices) {
             if (frase[i] == ' ') {
-                val imageView = gridLayout.getChildAt(i) as ImageView
+                val imageView =panel[i]
                 imageView.setImageResource(R.drawable.cuadroazul)
             }
         }
