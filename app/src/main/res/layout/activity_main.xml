@@ -91,13 +91,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <Button
 
         android:id="@+id/btnGirar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="60dp"
         android:text="Girar Ruleta"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -106,13 +107,15 @@
         android:id="@+id/imageView"
         android:layout_width="67dp"
         android:layout_height="59dp"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="136dp"
-        android:src="@drawable/flecha"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="100dp"
+        android:rotation="90"
+        android:rotationX="360"
+        android:rotationY="360"
+        android:src="@drawable/marcador"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <ImageView
         android:id="@+id/hueco22"

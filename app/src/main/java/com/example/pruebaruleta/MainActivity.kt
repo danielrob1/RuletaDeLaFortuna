@@ -47,6 +47,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fraseSinEspacios: String
     private  var longitudFrase=0
     private  var letrasLevantadas=0
+    private var sectores = listOf(50,60,70,1,0,10,20,30,40,50,60,70,10,20,30,40)
+    private var sectoresAngulos= IntArray(sectores.size)
+    private var grados = 0
+
 
 
 
@@ -70,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         textviewprueba2 = findViewById(R.id.textView4)
         btnResolver = findViewById(R.id.btnResolver)
         button.isEnabled = false
-
+        obtenerGradosPorSectores()
 
         for (i in 0..31) {
             val id = resources.getIdentifier("hueco$i", "id", packageName)
@@ -80,13 +84,17 @@ class MainActivity : AppCompatActivity() {
         button.setOnClickListener {
             if(ruletaGirada){
                 val letra = editTextText.text.toString().uppercase().firstOrNull()
-                if (letra != null) {
+                if (letra == null || letra == ' ') {
+                    Toast.makeText(this, "Introduce una letra válida", Toast.LENGTH_SHORT).show()
+                } else {
                     verificarLetra(letra)
+                    ruletaGirada = false
                 }
+
             } else{
                 Toast.makeText(this, "La ruleta no se ha girado", Toast.LENGTH_SHORT).show()
             }
-            ruletaGirada=false
+
             editTextText.text.clear()
 
         }
@@ -101,30 +109,21 @@ class MainActivity : AppCompatActivity() {
         }
         seleccionarJugador(turnoDeJugador)
         CoroutineScope(Dispatchers.IO).launch {
-            frases = fraseDao.obtenerTodasLasFrases()
+            frases = fraseDao.obtenerFrasesSinPanelFinal()
             withContext(Dispatchers.Main) {
                 if (frases.isNotEmpty()) {
                     val aleatorio = Random.nextInt(0, frases.size)
-                    frase="UN GATO SE CUELA EN UNA REUNION"
-                    //frase = frases[aleatorio].frase
+                    //frase="UN GATO SE CUELA EN UNA REUNION"
+                    frase = frases[aleatorio].frase
                     fraseSinEspacios = frase.replace(" ", "")
                     longitudFrase = fraseSinEspacios.length
                     letrasLevantadas = 0
-                    textviewprueba2.text = frase
+                    textviewprueba2.text = frases[aleatorio].categoria
                     verificarEspacios()
                 } else {
                     Toast.makeText(this@MainActivity, "No se encontraron frases en la base de datos", Toast.LENGTH_SHORT).show()
                 }
             }
-            val textoCompleto = StringBuilder()
-            /**
-             *  frases.forEach {
-             *                 textoCompleto.append("Categoría: ${it.categoria}, Frase: ${it.frase}\n")
-             *             }
-             *             withContext(Dispatchers.Main) {
-             *                 textviewPrueba.text = textoCompleto.toString()
-             *             }
-             */
         }
         btnResolver.setOnClickListener {
             resolverFrase()
@@ -133,12 +132,10 @@ class MainActivity : AppCompatActivity() {
     }
     private fun girarRuleta() {
         btnGirar.isEnabled = false
-        anguloResultado=0
+        val random = Random.Default
+        grados = random.nextInt(sectores.size-1)
         resultado=""
-        // Seleccionar un valor aleatorio de giro entre 0 y 360 grados
-        val anguloAleatorio = Random.nextInt(360)
-        val vueltasCompletas = 360 * 5 // 5 vueltas completas antes de detenerse
-        val anguloFinal = anguloAleatorio + vueltasCompletas
+        val anguloFinal = (360* sectores.size) + sectoresAngulos[grados]
 
         // Animar el giro de la ruleta
         val animador = ObjectAnimator.ofFloat(ruleta, "rotation", 0f, anguloFinal.toFloat())
@@ -150,7 +147,7 @@ class MainActivity : AppCompatActivity() {
         animador.doOnEnd {
             ruletaGirada=true
             button.isEnabled = true
-             anguloResultado = anguloAleatorio % 360
+             anguloResultado = sectores[sectores.size-(grados +1)]
              resultado = obtenerResultado(anguloResultado)
             mostrarResultado(resultado)
         }
@@ -167,18 +164,13 @@ class MainActivity : AppCompatActivity() {
     }
     // Función que devuelve el resultado según el ángulo final
     private fun obtenerResultado(angulo: Int): String {
-        return when (angulo) {
-            in 20..59 -> "Jackpot"
-            in 60..99 -> "80"
-            in 100..139 -> "70"
-            in 140..179 -> "60"
-            in 180..219 -> "50"
-            in 220..259 -> "40"
-            in 260..299 -> "30"
-            in 300..339 -> "20"
-            else -> "10"
+        return when {
+           angulo == 0 -> "Jackpot"
+            angulo == 1 ->"Jackpot"
+            else -> angulo.toString()
         }
     }
+
 
     private fun seleccionarJugador(numero:Int):String{
         var jugador = ""
@@ -334,6 +326,12 @@ class MainActivity : AppCompatActivity() {
                 imageView.setImageResource(R.drawable.cuadroazul)
             }
         }
+        if (frase.length < 32) {
+            for (i in frase.length until 32) {
+                val imageView = panel[i]
+                imageView.setImageResource(R.drawable.cuadroazul)
+            }
+        }
     }
     private fun resolverFrase() {
         val editTextFrase = EditText(this)
@@ -381,6 +379,12 @@ class MainActivity : AppCompatActivity() {
         intent.putIntegerArrayListExtra("puntosRestantes", ArrayList(puntosRestantes))
         intent.putExtra("jugadores", jugadores)
         startActivity(intent)
+    }
+    private fun obtenerGradosPorSectores(){
+        val gradoSector = 360/sectores.size
+        for(i in sectores.indices){
+            sectoresAngulos[i]=(i+1) * gradoSector
+        }
     }
 
 

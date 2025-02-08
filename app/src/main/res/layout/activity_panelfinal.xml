@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
-    tools:context=".RuletaFinal">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textViewJ1"
         android:layout_width="116dp"
         android:layout_height="23dp"
-        android:layout_marginStart="160dp"
+        android:layout_marginStart="144dp"
         android:layout_marginTop="24dp"
-        android:background="#D67F45"
+        android:background="#FAE3C6"
         android:gravity="center"
         android:text="TextView"
+        android:textColor="#D67F45"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,7 +29,7 @@
         android:layout_height="300dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="136dp"
-        android:src="@drawable/ruleta"
+        android:src="@drawable/ruletaa"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,24 +54,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="189dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="436dp"
-        android:text="Introduce una letra"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
 
         android:id="@+id/btnGirar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="60dp"
         android:text="Girar Ruleta"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -79,250 +70,347 @@
         android:id="@+id/imageView"
         android:layout_width="67dp"
         android:layout_height="59dp"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="136dp"
-        android:src="@drawable/flecha"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="100dp"
+        android:rotation="90"
+        android:rotationX="360"
+        android:rotationY="360"
+        android:src="@drawable/marcador"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <GridLayout
-        android:id="@+id/gridLayout"
-        android:layout_width="429dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="592dp"
-        android:columnCount="16"
-        android:orientation="horizontal"
-        android:rowCount="2"
+    <ImageView
+        android:id="@+id/hueco22"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/cuadroblanco"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco0"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco7"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="184dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco1"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco15"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="376dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco2"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco4"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco3"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco12"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="304dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco4"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco1"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco5"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco9"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="232dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco6"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco10"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="256dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco7"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco11"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco8"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco3"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco9"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco8"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="208dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco10"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco0"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco11"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco5"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco12"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco2"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco13"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco14"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_row="0"
+        android:layout_column="14"
+        android:layout_marginStart="352dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco14"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco13"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="328dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco15"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco6"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco16"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco19"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco17"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco18"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco18"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco27"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco19"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco25"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="232dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco20"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco20"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco21"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco29"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="328dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco22"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco21"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco23"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco30"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="352dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco24"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco16"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco25"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco26"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="256dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco26"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco24"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="208dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco27"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco28"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="304dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco28"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco17"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco29"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
 
-        <ImageView
-            android:id="@+id/hueco30"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco31"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="376dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ImageView
-            android:id="@+id/hueco31"
-            android:layout_width="14dp"
-            android:layout_height="24dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/cuadroblanco" />
+    <ImageView
+        android:id="@+id/hueco23"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="184dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/cuadroblanco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    </GridLayout>
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="280dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="556dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnResolver"
