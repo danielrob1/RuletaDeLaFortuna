@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var ruleta: ImageView
     private lateinit var btnGirar: Button
     private  var panel:MutableList<ImageView> = mutableListOf()
+    private var letrasDichas = mutableListOf<Char>()
     private lateinit var editTextText: EditText
     private lateinit var button: Button
     private lateinit var textViewJ1: TextView
@@ -82,6 +83,7 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     verificarLetra(letra)
                     ruletaGirada = false
+                    letrasDichas.add(letra)
                 }
 
             } else{
@@ -201,7 +203,10 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "¡Resultado: $resultado!", Toast.LENGTH_SHORT).show()
     }
     private fun verificarLetra(letra: Char) {
-        if(letra!=' '){
+        if (letrasDichas.contains(letra)) {
+            Toast.makeText(this, "Ya se ha dicho la letra $letra", Toast.LENGTH_SHORT).show()
+        }
+        if(letra!=' ' && !letrasDichas.contains(letra)){
             var letraEncontrada = false
             for (i in frase.indices) {
                 if (frase[i] == letra) {
@@ -265,7 +270,7 @@ class MainActivity : AppCompatActivity() {
             'Ñ' -> R.drawable.nn
             'O' -> R.drawable.o
             'P' -> R.drawable.p
-           // 'Q' -> R.drawable.q
+            'Q' -> R.drawable.q
             'R' -> R.drawable.r
             'S' -> R.drawable.s
             'T' -> R.drawable.t
@@ -309,7 +314,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, "¡Correcto! Has acertado la frase.", Toast.LENGTH_LONG).show()
                     irARuletaFinal()
                 } else {
-                    Toast.makeText(this, "Incorrecto, la frase era $frase", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "¡Incorrecto!", Toast.LENGTH_SHORT).show()
                 }
             }
             .setNegativeButton("Cancelar") { dialog, _ ->

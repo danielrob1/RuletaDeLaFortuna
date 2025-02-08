@@ -5,6 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="245dp"
+        android:layout_height="195dp"
+        android:layout_marginStart="77dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
     <ListView
         android:id="@+id/listView"
         android:layout_width="403dp"

@@ -22,7 +22,7 @@ class VerHistorial : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ver_historial)
         listView = findViewById(R.id.listView)
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, historial)
+        adapter = ArrayAdapter(this, R.layout.item_historial, R.id.tvHistorial, historial)
         listView.adapter = adapter
 
         // Recuperar los datos de la base de datos

@@ -15,10 +15,10 @@
         android:layout_height="23dp"
         android:layout_marginStart="144dp"
         android:layout_marginTop="24dp"
-        android:background="#FAE3C6"
+        android:background="#D67F45"
         android:gravity="center"
         android:text="TextView"
-        android:textColor="#D67F45"
+        android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

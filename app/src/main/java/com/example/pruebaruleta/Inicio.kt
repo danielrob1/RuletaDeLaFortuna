@@ -19,15 +19,20 @@ class Inicio : AppCompatActivity() {
     private lateinit var editTextJ1: EditText
     private lateinit var editTextJ2: EditText
     private lateinit var editTextJ3: EditText
+    private lateinit var botonHistorial: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inicio)
-
         botonEntrar = findViewById(R.id.buttonEntrar)
         editTextJ1 = findViewById(R.id.editTextJ1)
         editTextJ2 = findViewById(R.id.editTextJ2)
         editTextJ3 = findViewById(R.id.editTextJ3)
+        botonHistorial = findViewById(R.id.buttonHistorial)
+        botonHistorial.setOnClickListener {
+            val intent = Intent(this, VerHistorial::class.java)
+            startActivity(intent)
+        }
 
         botonEntrar.setOnClickListener {
             lifecycleScope.launch {

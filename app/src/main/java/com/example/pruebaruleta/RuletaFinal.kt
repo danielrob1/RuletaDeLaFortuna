@@ -90,16 +90,7 @@ class RuletaFinal : AppCompatActivity() {
                     verificarLetra(letra.first()) // Procesar las letras si el formato es correcto
                 }
             } else {
-                // Mostrar mensajes de error dependiendo del problema
-                if (letras.size != 4) {
-                    Toast.makeText(this, "Introduce 4 palabras", Toast.LENGTH_SHORT).show()
-                }
-                if (contadorVocales != 1) {
-                    Toast.makeText(this, "Introduce solo una vocal", Toast.LENGTH_SHORT).show()
-                }
-                if (letras.isEmpty()) {
-                    Toast.makeText(this, "Introduce una letra", Toast.LENGTH_SHORT).show()
-                }
+                button.isEnabled = true
                 Toast.makeText(this, "Error en el formato", Toast.LENGTH_SHORT).show()
             }
 
@@ -179,6 +170,7 @@ class RuletaFinal : AppCompatActivity() {
     private fun resolverFrase() {
         // Crear un EditText para que el usuario introduzca la frase
         val editTextFrase = EditText(this)
+        editTextFrase.gravity = android.view.Gravity.CENTER
         editTextFrase.setTextColor(Color.BLACK)
         editTextFrase.hint = "Introduce la frase completa"
         // Construir el AlertDialog
@@ -297,7 +289,7 @@ class RuletaFinal : AppCompatActivity() {
             'Ñ' -> R.drawable.nn
             'O' -> R.drawable.o
             'P' -> R.drawable.p
-            // 'Q' -> R.drawable.q
+            'Q' -> R.drawable.q
             'R' -> R.drawable.r
             'S' -> R.drawable.s
             'T' -> R.drawable.t
