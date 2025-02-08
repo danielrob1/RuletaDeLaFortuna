@@ -3,6 +3,7 @@ package com.example.pruebaruleta
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.graphics.Color
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.animation.DecelerateInterpolator
 import android.widget.Button
@@ -46,6 +47,7 @@ class RuletaFinal : AppCompatActivity() {
     private lateinit var fraseSinEspacios: String
     private  var longitudFrase=0
     private  var letrasLevantadas=0
+    private var mediaPlayer: MediaPlayer? = null
 
 
 
@@ -65,6 +67,8 @@ class RuletaFinal : AppCompatActivity() {
         btnResolver = findViewById(R.id.btnResolver)
         button.isEnabled = false
         frase=""
+        mediaPlayer = MediaPlayer.create(this, R.raw.musicafondo)
+        mediaPlayer?.start()
         obtenerGradosPorSectores()
         for (i in 0..31) {
             val id = resources.getIdentifier("hueco$i", "id", packageName)
@@ -232,6 +236,8 @@ class RuletaFinal : AppCompatActivity() {
      */
 
     private fun irAPantallaFinal(haGanado: Boolean) {
+        mediaPlayer?.release() // Liberar recursos cuando la app se cierra
+        mediaPlayer = null
         val intent = Intent(this, PantallaFinal::class.java).apply {
             putExtra("jugadorFinal", jugadorFinal)
             putExtra("haGanado", haGanado)
@@ -347,6 +353,11 @@ class RuletaFinal : AppCompatActivity() {
         for(i in sectores.indices){
             sectoresAngulos[i]=(i+1) * gradoSector
         }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer?.release() // Liberar recursos cuando la app se cierra
+        mediaPlayer = null
     }
 
 

@@ -3,6 +3,7 @@ package com.example.pruebaruleta
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.graphics.Color
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.animation.DecelerateInterpolator
 import android.widget.Button
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
     private var sectores = listOf(50,60,70,1,0,10,20,30,40,50,60,70,10,20,30,40)
     private var sectoresAngulos= IntArray(sectores.size)
     private var grados = 0
+    private var mediaPlayer: MediaPlayer? = null
 
 
 
@@ -67,6 +69,8 @@ class MainActivity : AppCompatActivity() {
         textViewJ3 = findViewById(R.id.textViewJ3)
         textviewprueba2 = findViewById(R.id.textView4)
         btnResolver = findViewById(R.id.btnResolver)
+        mediaPlayer = MediaPlayer.create(this, R.raw.musicafondo)
+        mediaPlayer?.start()
         button.isEnabled = false
         obtenerGradosPorSectores()
 
@@ -324,6 +328,8 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
     private fun irARuletaFinal(){
+        mediaPlayer?.release() // Liberar recursos cuando la app se cierra
+        mediaPlayer = null
         val jugadorFinalEntry = jugadores.maxByOrNull { it.value }
         val jugadorFinal = jugadorFinalEntry?.key
         val puntosJugadorFinal = jugadorFinalEntry?.value
@@ -349,6 +355,11 @@ class MainActivity : AppCompatActivity() {
         for(i in sectores.indices){
             sectoresAngulos[i]=(i+1) * gradoSector
         }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer?.release() // Liberar recursos cuando la app se cierra
+        mediaPlayer = null
     }
 
 
