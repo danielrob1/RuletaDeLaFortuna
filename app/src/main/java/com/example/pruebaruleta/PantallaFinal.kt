@@ -24,6 +24,7 @@ class PantallaFinal : AppCompatActivity() {
         val textViewResultado: TextView = findViewById(R.id.textViewResultado)
         val textViewJugadorFinal: TextView = findViewById(R.id.textViewJugadorFinal)
         val textViewJugadoresRestantes: TextView = findViewById(R.id.textViewJugadoresRestantes)
+
         // Recuperar los datos del Intent
         val jugadorFinal = intent.getStringExtra("jugadorFinal") ?: "Desconocido"
         val haGanado = intent.getBooleanExtra("haGanado", false)

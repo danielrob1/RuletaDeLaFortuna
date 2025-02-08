@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.animation.DecelerateInterpolator
 import android.widget.Button
 import android.widget.EditText
-import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -52,12 +51,6 @@ class MainActivity : AppCompatActivity() {
     private var grados = 0
 
 
-
-
-
-
-    // Valores posibles de la ruleta (números y "Jackpot")
-    //private val valoresRuleta = listOf("Jackpot", "1", "2", "3", "4", "5", "6", "7", "8")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         db = FraseDatabase.getDatabase(this)
@@ -151,7 +144,6 @@ class MainActivity : AppCompatActivity() {
              resultado = obtenerResultado(anguloResultado)
             mostrarResultado(resultado)
         }
-        //cargarLetras(frase)
     }
     var jugadores = HashMap<String, Int>()
     private fun inicializarJugadores(jugador1: String, jugador2: String, jugador3: String) {
@@ -162,7 +154,6 @@ class MainActivity : AppCompatActivity() {
         textViewJ2.text = jugador2 + ":  " + jugadores[jugador2]
         textViewJ3.text = jugador3 + ":  " + jugadores[jugador3]
     }
-    // Función que devuelve el resultado según el ángulo final
     private fun obtenerResultado(angulo: Int): String {
         return when {
            angulo == 0 -> "Jackpot"
@@ -209,13 +200,6 @@ class MainActivity : AppCompatActivity() {
         }
         Toast.makeText(this, "¡Resultado: $resultado!", Toast.LENGTH_SHORT).show()
     }
-
-
-    private fun generarFrase() {
-        textviewprueba2.text=frase
-    }
-
-
     private fun verificarLetra(letra: Char) {
         if(letra!=' '){
             var letraEncontrada = false
@@ -291,32 +275,8 @@ class MainActivity : AppCompatActivity() {
             'X' -> R.drawable.x
             'Y' -> R.drawable.y
             'Z' -> R.drawable.z
-            else -> R.drawable.cuadroblanco // Default image for unknown characters
+            else -> R.drawable.cuadroblanco
         }
-    }
-
-    private fun cargarLetras(frase: String) {
-        val fraseCompleta = frase.toCharArray()
-        val frase1 = ArrayList<Char>()
-        val frase2 = ArrayList<Char>()
-        var mostrarString1 = ""
-        var mostrarString2 = ""
-
-        // Llenar frase1 con los primeros 16 caracteres
-        for (i in 0 until 16) {
-            frase1.add(fraseCompleta[i])  // Usar 'add' para agregar caracteres
-            mostrarString1 += frase1[i]
-        }
-
-        // Llenar frase2 con los caracteres restantes
-        for (j in 16 until fraseCompleta.size) {
-            frase2.add(fraseCompleta[j])  // Usar 'add' para agregar caracteres
-            mostrarString2 += frase2[j - 16]  // Ajustar el índice para concatenar correctamente
-        }
-
-        // Mostrar los resultados
-        Toast.makeText(this, mostrarString1, Toast.LENGTH_SHORT).show()
-        Toast.makeText(this, mostrarString2, Toast.LENGTH_SHORT).show()
     }
 
     private fun verificarEspacios() {
@@ -359,7 +319,6 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
     private fun irARuletaFinal(){
-        // Obtener el jugador con más puntos (jugadorFinal)
         val jugadorFinalEntry = jugadores.maxByOrNull { it.value }
         val jugadorFinal = jugadorFinalEntry?.key
         val puntosJugadorFinal = jugadorFinalEntry?.value
