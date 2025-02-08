@@ -11,7 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [Frase::class, Historial::class], version = 8) // Incrementa la versión
+@Database(entities = [Frase::class, Historial::class], version = 11) // Incrementa la versión
 abstract class FraseDatabase : RoomDatabase() {
 
     abstract fun fraseDao(): FraseDao

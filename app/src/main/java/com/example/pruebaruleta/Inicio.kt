@@ -31,30 +31,28 @@ class Inicio : AppCompatActivity() {
 
         botonEntrar.setOnClickListener {
             lifecycleScope.launch {
+                // Primero inserta las frases en la base de datos solo si no están insertadas
+                insertarFrasesEnBaseDeDatos()
 
-
-            // Primero inserta las frases en la base de datos solo si no están insertadas
-            insertarFrasesEnBaseDeDatos()
-
-            // Luego, pasa los datos a la MainActivity
-            val intent = Intent(this@Inicio, MainActivity::class.java)
-            if (editTextJ1.text.toString().isEmpty()) {
-                intent.putExtra("jugador1", "Jugador 1")
-            } else {
-                intent.putExtra("jugador1", editTextJ1.text.toString())
+                // Luego, pasa los datos a la MainActivity
+                val intent = Intent(this@Inicio, MainActivity::class.java)
+                if (editTextJ1.text.toString().isEmpty()) {
+                    intent.putExtra("jugador1", "Jugador 1")
+                } else {
+                    intent.putExtra("jugador1", editTextJ1.text.toString())
+                }
+                if (editTextJ2.text.toString().isEmpty()) {
+                    intent.putExtra("jugador2", "Jugador 2")
+                } else {
+                    intent.putExtra("jugador2", editTextJ2.text.toString())
+                }
+                if (editTextJ3.text.toString().isEmpty()) {
+                    intent.putExtra("jugador3", "Jugador 3")
+                } else {
+                    intent.putExtra("jugador3", editTextJ3.text.toString())
+                }
+                startActivity(intent)
             }
-            if (editTextJ2.text.toString().isEmpty()) {
-                intent.putExtra("jugador2", "Jugador 2")
-            } else {
-                intent.putExtra("jugador2", editTextJ2.text.toString())
-            }
-            if (editTextJ3.text.toString().isEmpty()) {
-                intent.putExtra("jugador3", "Jugador 3")
-            } else {
-                intent.putExtra("jugador3", editTextJ3.text.toString())
-            }
-            startActivity(intent)
-        }
         }
     }
 
@@ -67,31 +65,28 @@ class Inicio : AppCompatActivity() {
 
     // Método para insertar las frases en la base de datos de forma asíncrona
     private suspend fun insertarFrasesEnBaseDeDatos() {
-        lifecycleScope.launch {
-            try {
-                val database = getDatabase(applicationContext) // Obtén la instancia de la base de datos
-                // Comprobamos si ya existen frases en la base de datos
-                val frasesExistentes = database.fraseDao().obtenerTodasLasFrases()
-                if (frasesExistentes.isEmpty()) {
-                    // Si no hay frases, procedemos con la inserción
-                    val frases = leerFrasesDesdeJson("frases.json")
-                    withContext(Dispatchers.IO) {
-                        database.fraseDao().insertarFrases(frases)
-                    }
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(applicationContext, "Frases insertadas correctamente", Toast.LENGTH_SHORT).show()
-
-                    }
-                } else {
-                    // Si ya existen frases, mostramos un mensaje
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(applicationContext, "Las frases ya están insertadas", Toast.LENGTH_SHORT).show()
-                    }
+        try {
+            val database = getDatabase(applicationContext) // Obtén la instancia de la base de datos
+            // Comprobamos si ya existen frases en la base de datos
+            val frasesExistentes = database.fraseDao().obtenerTodasLasFrases()
+            if (frasesExistentes.isEmpty()) {
+                // Si no hay frases, procedemos con la inserción
+                val frases = leerFrasesDesdeJson("frases.json")
+                withContext(Dispatchers.IO) {
+                    database.fraseDao().insertarFrases(frases)
                 }
-            } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(applicationContext, "Error al insertar las frases: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, "Frases insertadas correctamente", Toast.LENGTH_SHORT).show()
                 }
+            } else {
+                // Si ya existen frases, mostramos un mensaje
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(applicationContext, "Las frases ya están insertadas", Toast.LENGTH_SHORT).show()
+                }
+            }
+        } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
+                Toast.makeText(applicationContext, "Error al insertar las frases: ${e.message}", Toast.LENGTH_LONG).show()
             }
         }
     }
