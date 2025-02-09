@@ -46,10 +46,7 @@ class Inicio : AppCompatActivity() {
 
         botonEntrar.setOnClickListener {
             lifecycleScope.launch {
-                // Primero inserta las frases en la base de datos solo si no están insertadas
                 insertarFrasesEnBaseDeDatos()
-
-                // Luego, pasa los datos a la MainActivity
                 val intent = Intent(this@Inicio, MainActivity::class.java)
                 if (editTextJ1.text.toString().isEmpty()) {
                     intent.putExtra("jugador1", "Jugador 1")
@@ -91,12 +88,9 @@ class Inicio : AppCompatActivity() {
                     database.fraseDao().insertarFrases(frases)
                 }
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(applicationContext, "Frases insertadas correctamente", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                // Si ya existen frases, mostramos un mensaje
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(applicationContext, "Las frases ya están insertadas", Toast.LENGTH_SHORT).show()
                 }
             }
         } catch (e: Exception) {

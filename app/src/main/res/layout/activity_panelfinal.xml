@@ -37,7 +37,7 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="248dp"
+        android:layout_marginStart="236dp"
         android:layout_marginTop="480dp"
         android:text="@string/btnLetra"
         app:layout_constraintStart_toStartOf="parent"
@@ -414,8 +414,8 @@
 
     <Button
         android:id="@+id/btnResolver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="156dp"
+        android:layout_height="44dp"
         android:layout_marginStart="236dp"
         android:layout_marginTop="528dp"
         android:text="@string/btnResolver"

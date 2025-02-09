@@ -11,11 +11,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [Frase::class, Historial::class], version = 12) // Incrementa la versión
+@Database(entities = [Frase::class, Historial::class], version = 13)
 abstract class FraseDatabase : RoomDatabase() {
 
     abstract fun fraseDao(): FraseDao
-    abstract fun historialDao(): HistorialDao // Agrega el DAO
+    abstract fun historialDao(): HistorialDao
 
     companion object {
         @Volatile
@@ -46,7 +46,7 @@ abstract class FraseDatabase : RoomDatabase() {
         private fun prepopulateDatabase(context: Context) {
             CoroutineScope(Dispatchers.IO).launch {
                 val frases = leerFrasesDesdeJson(context, "frases.json")
-                val database = getDatabase(context) // No hay recursión, ya está inicializada.
+                val database = getDatabase(context)
                 database.fraseDao().insertarFrases(frases)
             }
         }

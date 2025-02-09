@@ -22,6 +22,10 @@
         <string name="letraValida">Enter a valid letter</string>
         <string name="letraRepetida">This letter has already been used: </string>
         <string name="pasoTurno">Passing turn to the next player</string>
+        <string name="mensajeFinal">Congratulations, you have passed to the final phase. The letters O F S R will be revealed.
+        After spinning the wheel, you will have to enter a vowel and three consonants separated by spaces. Finally, guess the hidden phrase to increase your prize.
+        Good luck!</string>
+
 
         <!-- End of the game -->
         <string name="ganado">won with</string>

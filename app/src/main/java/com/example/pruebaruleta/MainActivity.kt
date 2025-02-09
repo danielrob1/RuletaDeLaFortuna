@@ -314,10 +314,9 @@ class MainActivity : AppCompatActivity() {
         val dialog = androidx.appcompat.app.AlertDialog.Builder(this)
             .setTitle("Comprobar frase")
             .setMessage(getString(R.string.resolverMensaje))
-            .setView(editTextFrase) // Añadir el EditText al diálogo
+            .setView(editTextFrase)
             .setPositiveButton(getString(R.string.resolverComprobar)) { _, _ ->
                 val fraseIntroducida = editTextFrase.text.toString().uppercase()
-                // Comprobar si la frase introducida coincide con la solución
                 if (fraseIntroducida == frase) {
                     Toast.makeText(this, getString(R.string.resolverCorrecto), Toast.LENGTH_LONG).show()
                     irARuletaFinal()
@@ -332,7 +331,7 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
     private fun irARuletaFinal(){
-        mediaPlayer?.release() // Liberar recursos cuando la app se cierra
+        mediaPlayer?.release()
         mediaPlayer = null
         val jugadorFinalEntry = jugadores.maxByOrNull { it.value }
         val jugadorFinal = jugadorFinalEntry?.key
@@ -362,7 +361,7 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onDestroy() {
         super.onDestroy()
-        mediaPlayer?.release() // Liberar recursos cuando la app se cierra
+        mediaPlayer?.release()
         mediaPlayer = null
     }
 

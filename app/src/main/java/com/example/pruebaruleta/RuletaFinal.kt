@@ -51,11 +51,6 @@ class RuletaFinal : AppCompatActivity() {
     private var mediaPlayer: MediaPlayer? = null
     private var idioma = Locale.getDefault().language
 
-
-
-    // Valores posibles de la ruleta (números y "Jackpot")
-    //private val valoresRuleta = listOf("Jackpot", "1", "2", "3", "4", "5", "6", "7", "8")
-
     override fun onCreate(savedInstanceState: Bundle?) {
         db = FraseDatabase.getDatabase(this)
         fraseDao= db.fraseDao()
@@ -72,6 +67,13 @@ class RuletaFinal : AppCompatActivity() {
         mediaPlayer = MediaPlayer.create(this, R.raw.musicafondo)
         mediaPlayer?.start()
         obtenerGradosPorSectores()
+        val dialog = androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("Final")
+            .setMessage(getString(R.string.mensajeFinal))
+            .setPositiveButton("Ok") { _, _ ->
+            }
+            .create()
+        dialog.show()
         for (i in 0..31) {
             val id = resources.getIdentifier("hueco$i", "id", packageName)
             val imageView = findViewById<ImageView>(id)
@@ -82,25 +84,20 @@ class RuletaFinal : AppCompatActivity() {
             var letra = editTextText.text.toString().uppercase()
             var letras = letra.split(" ")
             var contadorVocales = 0
-
-            // Contar las vocales en la entrada
             for (vocal in letras) {
                 if (vocal == "A" || vocal == "E" || vocal == "I" || vocal == "O" || vocal == "U") {
                     contadorVocales++
                 }
             }
 
-            // Verificar el formato
             if (letra.isNotEmpty() && letras.size == 4 && contadorVocales == 1) {
                 for (letra in letras) {
-                    verificarLetra(letra.first()) // Procesar las letras si el formato es correcto
+                    verificarLetra(letra.first())
                 }
             } else {
                 button.isEnabled = true
                 Toast.makeText(this, getString(R.string.letraValida), Toast.LENGTH_SHORT).show()
             }
-
-            // Reiniciar variables al final
             ruletaGirada = false
             editTextText.text.clear()
         }
@@ -142,7 +139,6 @@ class RuletaFinal : AppCompatActivity() {
     }
 
 
-
     var letrasIniciales = listOf('R','S','F','O')
     private fun girarRuleta() {
         btnGirar.isEnabled = false
@@ -151,14 +147,10 @@ class RuletaFinal : AppCompatActivity() {
         resultado=""
         val anguloFinal=(360* sectores.size) + sectoresAngulos[grados]
 
-
-        // Animar el giro de la ruleta
         val animador = ObjectAnimator.ofFloat(ruleta, "rotation", 0f, anguloFinal.toFloat())
-        animador.duration = 5000 // Duración de 3 segundos
-        animador.interpolator = DecelerateInterpolator() // Interpolador para desacelerar el giro
+        animador.duration = 5000
+        animador.interpolator = DecelerateInterpolator()
         animador.start()
-
-        // Mostrar el resultado cuando termina la animación
         animador.doOnEnd {
             ruletaGirada=true
             button.isEnabled = true
@@ -169,7 +161,6 @@ class RuletaFinal : AppCompatActivity() {
                 verificarLetra(letra)
             }
         }
-        //cargarLetras(frase)
         btnResolver.setOnClickListener {
             resolverFrase()
         }
@@ -177,19 +168,17 @@ class RuletaFinal : AppCompatActivity() {
 
     }
     private fun resolverFrase() {
-        // Crear un EditText para que el usuario introduzca la frase
         val editTextFrase = EditText(this)
         editTextFrase.gravity = android.view.Gravity.CENTER
         editTextFrase.setTextColor(Color.BLACK)
         editTextFrase.hint = getString(R.string.resolverHint)
-        // Construir el AlertDialog
         val dialog = androidx.appcompat.app.AlertDialog.Builder(this)
             .setTitle("Comprobar frase")
             .setMessage(getString(R.string.resolverMensaje))
-            .setView(editTextFrase) // Añadir el EditText al diálogo
+            .setView(editTextFrase)
             .setPositiveButton(getString(R.string.resolverComprobar)) { _, _ ->
                 val fraseIntroducida = editTextFrase.text.toString().uppercase()
-                // Comprobar si la frase introducida coincide con la solución
+
                 if (fraseIntroducida == frase) {
                     jugadores[jugadorFinal] = jugadores[jugadorFinal]!! + resultado.toInt()
                     Toast.makeText(this, getString(R.string.resolverCorrecto), Toast.LENGTH_LONG).show()
@@ -200,22 +189,19 @@ class RuletaFinal : AppCompatActivity() {
                 }
             }
             .setNegativeButton(getString(R.string.resolverCancelar)) { dialog, _ ->
-                dialog.dismiss() // Cerrar el diálogo si el usuario cancela
+                dialog.dismiss()
             }
             .create()
-
-        // Mostrar el diálogo
         dialog.show()
     }
     private fun inicializarJugadores(jugador: String) {
         textViewJ1.text = jugador + ": " + jugadores[jugador]
     }
-    // Función que devuelve el resultado según el ángulo final
     private fun obtenerResultado(angulo: Int): String {
         return angulo.toString()
     }
     private fun irAPantallaFinal(haGanado: Boolean) {
-        mediaPlayer?.release() // Liberar recursos cuando la app se cierra
+        mediaPlayer?.release()
         mediaPlayer = null
         val intent = Intent(this, PantallaFinal::class.java).apply {
             putExtra("jugadorFinal", jugadorFinal)
@@ -230,13 +216,11 @@ class RuletaFinal : AppCompatActivity() {
             putExtra("jugadores", jugadores)
         }
         startActivity(intent)
-        finish() // Cierra la actividad actual
+        finish()
     }
     private fun mostrarResultado(resultado: String) {
         Toast.makeText(this, getString(R.string.toastResultaado) +  resultado + "!", Toast.LENGTH_SHORT).show()
     }
-
-
 
     private fun verificarLetra(letra: Char) {
             var letraEncontrada = false
@@ -281,32 +265,8 @@ class RuletaFinal : AppCompatActivity() {
             'X' -> R.drawable.x
             'Y' -> R.drawable.y
             'Z' -> R.drawable.z
-            else -> R.drawable.cuadroblanco // Default image for unknown characters
+            else -> R.drawable.cuadroblanco
         }
-    }
-
-    private fun cargarLetras(frase: String) {
-        val fraseCompleta = frase.toCharArray()
-        val frase1 = ArrayList<Char>()
-        val frase2 = ArrayList<Char>()
-        var mostrarString1 = ""
-        var mostrarString2 = ""
-
-        // Llenar frase1 con los primeros 16 caracteres
-        for (i in 0 until 16) {
-            frase1.add(fraseCompleta[i])  // Usar 'add' para agregar caracteres
-            mostrarString1 += frase1[i]
-        }
-
-        // Llenar frase2 con los caracteres restantes
-        for (j in 16 until fraseCompleta.size) {
-            frase2.add(fraseCompleta[j])  // Usar 'add' para agregar caracteres
-            mostrarString2 += frase2[j - 16]  // Ajustar el índice para concatenar correctamente
-        }
-
-        // Mostrar los resultados
-        Toast.makeText(this, mostrarString1, Toast.LENGTH_SHORT).show()
-        Toast.makeText(this, mostrarString2, Toast.LENGTH_SHORT).show()
     }
 
     private fun verificarEspacios() {
@@ -332,7 +292,7 @@ class RuletaFinal : AppCompatActivity() {
     }
     override fun onDestroy() {
         super.onDestroy()
-        mediaPlayer?.release() // Liberar recursos cuando la app se cierra
+        mediaPlayer?.release()
         mediaPlayer = null
     }
 

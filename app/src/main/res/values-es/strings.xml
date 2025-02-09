@@ -22,6 +22,10 @@
     <string name="letraValida">Introduce una letra con formato válido</string>
     <string name="letraRepetida">Ya se ha dicho la letra: </string>
     <string name="pasoTurno">Se pasa el turno al siguiente jugador</string>
+    <string name="mensajeFinal">Felicidades, has pasado a la fase final. Se revelarán las letras O F S R.
+        Después de girar la ruleta, deberás introducir una vocal y tres consonantes separadas por espacios. Por último, adivina la frase oculta para aumentar tu premio.
+        ¡Mucha suerte!</string>
+
 
 
     <!--Fin del juego-->
