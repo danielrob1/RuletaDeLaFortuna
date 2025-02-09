@@ -30,11 +30,11 @@
         android:id="@+id/btnInicio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pantalla de inicio" />
+        android:text="@string/inicio" />
 
     <Button
         android:id="@+id/btnHistorial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ver historial" />
+        android:text="@string/btnHistorial" />
 </LinearLayout>

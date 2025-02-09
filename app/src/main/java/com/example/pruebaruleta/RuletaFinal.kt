@@ -95,7 +95,7 @@ class RuletaFinal : AppCompatActivity() {
                 }
             } else {
                 button.isEnabled = true
-                Toast.makeText(this, "Error en el formato", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.letraValida), Toast.LENGTH_SHORT).show()
             }
 
             // Reiniciar variables al final
@@ -173,25 +173,25 @@ class RuletaFinal : AppCompatActivity() {
         val editTextFrase = EditText(this)
         editTextFrase.gravity = android.view.Gravity.CENTER
         editTextFrase.setTextColor(Color.BLACK)
-        editTextFrase.hint = "Introduce la frase completa"
+        editTextFrase.hint = getString(R.string.resolverHint)
         // Construir el AlertDialog
         val dialog = androidx.appcompat.app.AlertDialog.Builder(this)
             .setTitle("Comprobar frase")
-            .setMessage("Introduce la frase completa para comprobar si has acertado:")
+            .setMessage(getString(R.string.resolverMensaje))
             .setView(editTextFrase) // Añadir el EditText al diálogo
-            .setPositiveButton("Comprobar") { _, _ ->
+            .setPositiveButton(getString(R.string.resolverComprobar)) { _, _ ->
                 val fraseIntroducida = editTextFrase.text.toString().uppercase()
                 // Comprobar si la frase introducida coincide con la solución
                 if (fraseIntroducida == frase) {
                     jugadores[jugadorFinal] = jugadores[jugadorFinal]!! + resultado.toInt()
-                    Toast.makeText(this, "¡Correcto! Has acertado la frase.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.resolverCorrecto), Toast.LENGTH_LONG).show()
                     irAPantallaFinal(true)
                 } else {
-                    Toast.makeText(this, "Incorrecto, la frase era $frase", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.resolverIncorrecto) +" " + frase, Toast.LENGTH_SHORT).show()
                     irAPantallaFinal(false)
                 }
             }
-            .setNegativeButton("Cancelar") { dialog, _ ->
+            .setNegativeButton(getString(R.string.resolverCancelar)) { dialog, _ ->
                 dialog.dismiss() // Cerrar el diálogo si el usuario cancela
             }
             .create()
@@ -206,28 +206,6 @@ class RuletaFinal : AppCompatActivity() {
     private fun obtenerResultado(angulo: Int): String {
         return angulo.toString()
     }
-
-    /**
-     *  private fun seleccionarJugador(numero:Int):String{
-     *         var jugador = ""
-     *         when(numero){
-     *             1->{
-     *                 textViewTurno.text="Es el turno de " + jugador
-     *                 jugador=jugador1
-     *             }
-     *             2->{
-     *                 textViewTurno.text="Es el turno de " + jugador2
-     *                 jugador=jugador2
-     *             }
-     *             3->{
-     *                 textViewTurno.text="Es el turno de " + jugador3
-     *                 jugador=jugador3
-     *             }
-     *         }
-     *         return jugador
-     *     }
-     */
-
     private fun irAPantallaFinal(haGanado: Boolean) {
         mediaPlayer?.release() // Liberar recursos cuando la app se cierra
         mediaPlayer = null
@@ -247,7 +225,7 @@ class RuletaFinal : AppCompatActivity() {
         finish() // Cierra la actividad actual
     }
     private fun mostrarResultado(resultado: String) {
-        Toast.makeText(this, "¡Resultado: $resultado!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.toastResultaado) +  resultado + "!", Toast.LENGTH_SHORT).show()
     }
 
 
@@ -263,7 +241,7 @@ class RuletaFinal : AppCompatActivity() {
                 }
             }
             if (!letraEncontrada) {
-                Toast.makeText(this, "La letra $letra no está en la palabra.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.toastNoEsta) + letra, Toast.LENGTH_SHORT).show()
             }
     }
     private fun asignarImagenLetra(letra: Char): Int {

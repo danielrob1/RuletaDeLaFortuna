@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="248dp"
         android:layout_marginTop="480dp"
-        android:text="Button"
+        android:text="@string/btnLetra"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="136dp"
         android:layout_marginTop="60dp"
-        android:text="Girar Ruleta"
+        android:text="@string/btnGirar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -418,7 +418,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="236dp"
         android:layout_marginTop="528dp"
-        android:text="Resolver"
+        android:text="@string/btnResolver"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

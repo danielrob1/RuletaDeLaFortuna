@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <!-- Start Screen -->
+        <string name="placeHolder1">Player 1</string>
+        <string name="placeHolder2">Player 2</string>
+        <string name="placeHolder3">Player 3</string>
+        <string name="btnComenzar">Start</string>
+        <string name="btnHistorial">View History</string>
+
+        <!-- Main Wheel Screen -->
+        <string name="btnGirar">Spin Wheel</string>
+        <string name="btnLetra">Enter the letter</string>
+        <string name="btnResolver">Solve</string>
+        <string name="toastResultaado">Result: </string>
+        <string name="toastNoEsta">This letter is not in the phrase: </string>
+        <string name="resolverMensaje">Enter the complete phrase to check if it is correct:</string>
+        <string name="resolverHint">Enter the complete phrase</string>
+        <string name="resolverCancelar">Cancel</string>
+        <string name="resolverComprobar">Check</string>
+        <string name="resolverIncorrecto">Incorrect!</string>
+        <string name="resolverCorrecto">Correct, you got the phrase right!</string>
+        <string name="letraValida">Enter a valid letter</string>
+        <string name="letraRepetida">This letter has already been used: </string>
+        <string name="pasoTurno">Passing turn to the next player</string>
+
+        <!-- End of the game -->
+        <string name="ganado">won with</string>
+        <string name="perdido">lost with</string>
+        <string name="restantes">Remaining players</string>
+        <string name="inicio">Return to start</string>
+    </resources>
+

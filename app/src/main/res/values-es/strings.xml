@@ -19,9 +19,16 @@
     <string name="resolverComprobar">Comprobar</string>
     <string name="resolverIncorrecto">¡Incorrecto!</string>
     <string name="resolverCorrecto">¡Correcto, has acertado la frase!</string>
-    <string name="letraValida">Introduce una letra válida</string>
+    <string name="letraValida">Introduce una letra con formato válido</string>
     <string name="letraRepetida">Ya se ha dicho la letra: </string>
     <string name="pasoTurno">Se pasa el turno al siguiente jugador</string>
+
+
+    <!--Fin del juego-->
+    <string name="ganado">Ha ganado con</string>
+    <string name="perdido">Ha perdido con</string>
+    <string name="restantes">Jugadores restantes</string>
+    <string name="inicio">Volver al inicio</string>
 
 
 

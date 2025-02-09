@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -13,6 +14,7 @@ import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Locale
 
 class Inicio : AppCompatActivity() {
     private lateinit var botonEntrar: Button
@@ -20,6 +22,8 @@ class Inicio : AppCompatActivity() {
     private lateinit var editTextJ2: EditText
     private lateinit var editTextJ3: EditText
     private lateinit var botonHistorial: Button
+    private lateinit var logo: ImageView
+    val idioma = Locale.getDefault().language
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +33,12 @@ class Inicio : AppCompatActivity() {
         editTextJ2 = findViewById(R.id.editTextJ2)
         editTextJ3 = findViewById(R.id.editTextJ3)
         botonHistorial = findViewById(R.id.buttonHistorial)
+        logo = findViewById(R.id.imageView5)
+        if (idioma == "es") {
+            logo.setImageResource(R.drawable.logo)
+        }else if(idioma == "en"){
+            logo.setImageResource(R.drawable.logoen)
+        }
         botonHistorial.setOnClickListener {
             val intent = Intent(this, VerHistorial::class.java)
             startActivity(intent)

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
         android:layout_marginTop="560dp"
-        android:text="Ver Historial"
+        android:text="@string/btnHistorial"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,7 +33,7 @@
         android:layout_marginStart="276dp"
         android:layout_marginTop="360dp"
         android:ems="10"
-        android:hint="Jugador 3"
+        android:hint="@string/placeHolder3"
         android:inputType="text"
         android:textColorHint="#40FFC266"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +66,7 @@
         android:layout_marginStart="144dp"
         android:layout_marginTop="360dp"
         android:ems="10"
-        android:hint="Jugador 2"
+        android:hint="@string/placeHolder2"
         android:textColorHint="#40FFC266"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
         android:layout_marginTop="480dp"
-        android:text="Comenzar"
+        android:text="@string/btnComenzar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -90,7 +90,7 @@
         android:layout_marginTop="360dp"
         android:ems="10"
         android:textColorHint="#40FFC266"
-        android:hint="Jugador 1"
+        android:hint="@string/placeHolder1"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

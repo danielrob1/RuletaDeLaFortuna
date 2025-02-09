@@ -1,3 +1,36 @@
 <resources>
-    <string name="app_name">prueba ruleta</string>
+    <string name="app_name" translatable="false">Ruleta de la Fortuna</string>
+    <!-- Inicio -->
+    <string name="placeHolder1">Jugador 1</string>
+    <string name ="placeHolder2">Jugador 2</string>
+    <string name ="placeHolder3">Jugador 3</string>
+    <string name="btnComenzar">Comenzar</string>
+    <string name="btnHistorial">Ver Historial</string>
+
+    <!--Ruleta Principal-->
+    <string name="btnGirar">Girar Ruleta</string>
+    <string name="btnLetra">Introduce la letra</string>
+    <string name="btnResolver">Resolver</string>
+    <string name="toastResultaado">Resultado: </string>
+    <string name="toastNoEsta">Esta letra no está en la frase: </string>
+    <string name="resolverMensaje">Introduce la frase completa para comprobar si has acertado:</string>
+    <string name="resolverHint">Introduce la frase completa</string>
+    <string name="resolverCancelar">Cancelar</string>
+    <string name="resolverComprobar">Comprobar</string>
+    <string name="resolverIncorrecto">¡Incorrecto!</string>
+    <string name="resolverCorrecto">¡Correcto, has acertado la frase!</string>
+    <string name="letraValida">Introduce una letra con formato válido</string>
+    <string name="letraRepetida">Ya se ha dicho la letra: </string>
+    <string name="pasoTurno">Se pasa el turno al siguiente jugador</string>
+
+
+    <!--Fin del juego-->
+    <string name="ganado">Ha ganado con</string>
+    <string name="perdido">Ha perdido con</string>
+    <string name="restantes">Jugadores restantes</string>
+    <string name="inicio">Volver al inicio</string>
+
+
+
+
 </resources>

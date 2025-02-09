@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
             if(ruletaGirada){
                 val letra = editTextText.text.toString().uppercase().firstOrNull()
                 if (letra == null || letra == ' ') {
-                    Toast.makeText(this, "Introduce una letra válida", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.letraValida), Toast.LENGTH_SHORT).show()
                 } else {
                     verificarLetra(letra)
                     ruletaGirada = false
@@ -112,7 +112,6 @@ class MainActivity : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 if (frases.isNotEmpty()) {
                     val aleatorio = Random.nextInt(0, frases.size)
-                    //frase="UN GATO SE CUELA EN UNA REUNION"
                     frase = frases[aleatorio].frase
                     fraseSinEspacios = frase.replace(" ", "")
                     longitudFrase = fraseSinEspacios.length
@@ -120,7 +119,7 @@ class MainActivity : AppCompatActivity() {
                     textviewprueba2.text = frases[aleatorio].categoria
                     verificarEspacios()
                 } else {
-                    Toast.makeText(this@MainActivity, "No se encontraron frases en la base de datos", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "Error al obtener frases", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -135,14 +134,10 @@ class MainActivity : AppCompatActivity() {
         grados = random.nextInt(sectores.size-1)
         resultado=""
         val anguloFinal = (360* sectores.size) + sectoresAngulos[grados]
-
-        // Animar el giro de la ruleta
         val animador = ObjectAnimator.ofFloat(ruleta, "rotation", 0f, anguloFinal.toFloat())
-        animador.duration = 5000 // Duración de 3 segundos
-        animador.interpolator = DecelerateInterpolator() // Interpolador para desacelerar el giro
+        animador.duration = 5000
+        animador.interpolator = DecelerateInterpolator()
         animador.start()
-
-        // Mostrar el resultado cuando termina la animación
         animador.doOnEnd {
             ruletaGirada=true
             button.isEnabled = true
@@ -203,13 +198,13 @@ class MainActivity : AppCompatActivity() {
         if(resultado=="Paso"){
             verificarLetra(' ')
         }else{
-            Toast.makeText(this, "¡Resultado: $resultado!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.toastResultaado) + resultado + "!", Toast.LENGTH_SHORT).show()
         }
 
     }
     private fun verificarLetra(letra: Char) {
         if (letrasDichas.contains(letra)) {
-            Toast.makeText(this, "Ya se ha dicho la letra $letra", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.letraRepetida) + letra, Toast.LENGTH_SHORT).show()
         }
         if(letra!=' ' && !letrasDichas.contains(letra)){
             var letraEncontrada = false
@@ -235,7 +230,7 @@ class MainActivity : AppCompatActivity() {
                 irARuletaFinal()
             }
             if (!letraEncontrada) {
-                Toast.makeText(this, "La letra $letra no está en la palabra.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.toastNoEsta) + letra, Toast.LENGTH_SHORT).show()
                 turnoDeJugador++
                 if(turnoDeJugador>3){
                     turnoDeJugador=1
@@ -243,7 +238,7 @@ class MainActivity : AppCompatActivity() {
                 seleccionarJugador(turnoDeJugador)
             }
         } else{
-            Toast.makeText(this, "Se pasa el turno al siguiente jugador", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.pasoTurno), Toast.LENGTH_SHORT).show()
             turnoDeJugador++
             if(turnoDeJugador>3){
                 turnoDeJugador=1
@@ -307,22 +302,22 @@ class MainActivity : AppCompatActivity() {
         val editTextFrase = EditText(this)
         editTextFrase.gravity = android.view.Gravity.CENTER
         editTextFrase.setTextColor(Color.BLACK)
-        editTextFrase.hint = "Introduce la frase completa"
+        editTextFrase.hint = getString(R.string.resolverHint)
         val dialog = androidx.appcompat.app.AlertDialog.Builder(this)
             .setTitle("Comprobar frase")
-            .setMessage("Introduce la frase completa para comprobar si has acertado:")
+            .setMessage(getString(R.string.resolverMensaje))
             .setView(editTextFrase) // Añadir el EditText al diálogo
-            .setPositiveButton("Comprobar") { _, _ ->
+            .setPositiveButton(getString(R.string.resolverComprobar)) { _, _ ->
                 val fraseIntroducida = editTextFrase.text.toString().uppercase()
                 // Comprobar si la frase introducida coincide con la solución
                 if (fraseIntroducida == frase) {
-                    Toast.makeText(this, "¡Correcto! Has acertado la frase.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.resolverCorrecto), Toast.LENGTH_LONG).show()
                     irARuletaFinal()
                 } else {
-                    Toast.makeText(this, "¡Incorrecto!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.resolverIncorrecto), Toast.LENGTH_SHORT).show()
                 }
             }
-            .setNegativeButton("Cancelar") { dialog, _ ->
+            .setNegativeButton(getString(R.string.resolverCancelar)) { dialog, _ ->
                 dialog.dismiss()
             }
             .create()

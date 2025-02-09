@@ -9,10 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 class PantallaFinal : AppCompatActivity() {
     private lateinit var db: FraseDatabase
     private lateinit var historialDao: HistorialDao
+    val idioma = Locale.getDefault().language
+    var noGanador=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         db = FraseDatabase.getDatabase(this)
@@ -24,6 +27,13 @@ class PantallaFinal : AppCompatActivity() {
         val textViewResultado: TextView = findViewById(R.id.textViewResultado)
         val textViewJugadorFinal: TextView = findViewById(R.id.textViewJugadorFinal)
         val textViewJugadoresRestantes: TextView = findViewById(R.id.textViewJugadoresRestantes)
+        if (idioma == "es") {
+            noGanador="Sin Ganador"
+        } else if (idioma == "en") {
+            noGanador="No Winner"
+        } else {
+            noGanador="Sin Ganador"
+        }
 
         // Recuperar los datos del Intent
         val jugadorFinal = intent.getStringExtra("jugadorFinal") ?: "Desconocido"
@@ -44,9 +54,9 @@ class PantallaFinal : AppCompatActivity() {
 
         // Mostrar el resultado del jugador final
         textViewResultado.text = if (haGanado) {
-            "¡$jugadorFinal ha ganado con $puntosJugadorFinal puntos!"
+           jugadorFinal +" " + getString(R.string.ganado) +" " + puntosJugadorFinal.toString() + "€"
         } else {
-            "¡$jugadorFinal ha perdido con $puntosJugadorFinal puntos!"
+            jugadorFinal +" " + getString(R.string.perdido) +" " + puntosJugadorFinal.toString() + "€"
         }
         guardarEnHistorial(
             jugador1,
@@ -59,9 +69,9 @@ class PantallaFinal : AppCompatActivity() {
             haGanado
         )
         // Mostrar los jugadores restantes y sus puntos
-        val textoRestantes = StringBuilder("Jugadores restantes:\n")
+        val textoRestantes = StringBuilder(getString(R.string.restantes) + "\n")
         for (i in jugadoresRestantes.indices) {
-            textoRestantes.append("${jugadoresRestantes[i]}: ${puntosRestantes[i]} puntos\n")
+            textoRestantes.append("${jugadoresRestantes[i]}: ${puntosRestantes[i]} €\n")
         }
         textViewJugadoresRestantes.text = textoRestantes.toString()
         btnHistorial.setOnClickListener {
@@ -93,7 +103,7 @@ class PantallaFinal : AppCompatActivity() {
                 puntos1 = puntos1,
                 puntos2= puntos2,
                 puntos3 = puntos3,
-                ganador = "Sin ganador"
+                ganador = noGanador
             )
         }
         CoroutineScope(Dispatchers.IO).launch {
