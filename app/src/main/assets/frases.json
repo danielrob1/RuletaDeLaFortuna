@@ -2,7 +2,7 @@
   { "categoria": "TITULAR LOCO", "frase": "EL SOL SE APAGA POR ERROR HUMANO", "idioma": "esp" },
   { "categoria": "TITULAR LOCO", "frase": "MONOS INVADEN UN CINE EN LONDRES", "idioma": "esp" },
   { "categoria": "TITULAR LOCO", "frase": "UN ELEFANTE GANA LAS ELECCIONES", "idioma": "esp" },
-  { "categoria": "LETRA DE UNA CANCION", "frase": "Y NOS DIERON LASDIEZ Y LAS ONCE", "idioma": "esp" },
+  { "categoria": "LETRA DE UNA CANCION", "frase": "QUIERO SER TUYO SIEMPRE TUYO", "idioma": "esp" },
   { "categoria": "LETRA DE UNA CANCION", "frase": "QUE BONITO ES LO QUE NO SE VE", "idioma": "esp" },
   { "categoria": "LETRA DE UNA CANCION", "frase": "SE MARCHO Y A SU BARCO LE LLAMO", "idioma": "esp" },
   { "categoria": "DESCUBRIMIENTO CIENTIFICO", "frase": "LOS GATOS SABEN HABLAR EN INGLES", "idioma": "esp" },
@@ -31,11 +31,22 @@
   { "categoria": "SONG LYRICS", "frase": "KARMA IS THE GUY ON THE SCREEN", "idioma": "eng" },
   { "categoria": "SONG LYRICS", "frase": "TELL THEM HOW I HOPE THEY SHINE", "idioma": "eng" },
   { "categoria": "SCIENTIFIC DISCOVERY", "frase": "NEW PLANET FOUND IN MILKY WAY", "idioma": "eng" },
-  { "categoria": "SCIENTIFIC DISCOVERY", "frase": "SCIENTIST FIND ARTIFICIAL LIFE", "idioma": "eng" },
+  { "categoria": "SCIENTIFIC DISCOVERY", "frase": "SCIENTIST FIND  ARTIFICIAL LIFE", "idioma": "eng" },
   { "categoria": "SCIENTIFIC DISCOVERY", "frase": "QUANTUM COMPUTER BREAKS RECORDS", "idioma": "eng" },
   { "categoria": "LOVE AND HEARTBREAK", "frase": "I WISH WE COULD BE TOGETHER NOW", "idioma": "eng" },
   { "categoria": "LOVE AND HEARTBREAK", "frase": "YOU ARE THE BEST GUY I HAVE MET", "idioma": "eng" },
   { "categoria": "LOVE AND HEARTBREAK", "frase": "YOU ARE THE KING OF MY HEART", "idioma": "eng" },
   { "categoria": "FINAL PANEL", "frase": "DREAM HIGH WORK HARD STAY HUMBLE", "idioma": "eng" },
-  { "categoria": "FINAL PANEL", "frase": "EVERYTHING THEY MAKE IS PERFECT", "idioma": "eng" }
+  { "categoria": "FINAL PANEL", "frase": "EVERYTHING THEY MAKE IS PERFECT", "idioma": "eng" },
+  { "categoria": "FINAL PANEL", "frase": "THE EARLY BIRD CATCHES THE WORMS", "idioma": "eng" },
+  { "categoria": "FINAL PANEL", "frase": "ITS BETTER TO BE SAFE THAN SORRY", "idioma": "eng" },
+  { "categoria": "FINAL PANEL", "frase": "EVERYTHING THEY LOSE IS A STEP", "idioma": "eng" },
+  { "categoria": "FINAL PANEL", "frase": "IT IS US AGAINST THE WHOLE WORLD", "idioma": "eng" },
+  { "categoria": "FINAL PANEL", "frase": "TOGETHER WE ARE UNDEFEATABLE", "idioma": "eng" },
+  { "categoria": "FINAL PANEL", "frase": "GREAT THINGS ARE HARD TO FIND", "idioma": "eng" },
+  { "categoria": "FINAL PANEL", "frase": "WHAT RAISES FAST FALLS FASTER", "idioma": "eng" },
+  { "categoria": "FINAL PANEL", "frase": "NOT EVERYONE IS MEANT TO STAY", "idioma": "eng" }
+
+
+
 ]
