@@ -19,6 +19,7 @@ import kotlinx.coroutines.launch
 import kotlin.random.Random
 import com.example.pruebaruleta.FraseDatabase.*
 import kotlinx.coroutines.withContext
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     private lateinit var  db: FraseDatabase
@@ -52,6 +53,7 @@ class MainActivity : AppCompatActivity() {
     private var sectoresAngulos= IntArray(sectores.size)
     private var grados = 0
     private var mediaPlayer: MediaPlayer? = null
+    private var idioma = Locale.getDefault().language
 
 
 
@@ -108,7 +110,13 @@ class MainActivity : AppCompatActivity() {
         }
         seleccionarJugador(turnoDeJugador)
         CoroutineScope(Dispatchers.IO).launch {
-            frases = fraseDao.obtenerFrasesSinPanelFinal()
+            if (idioma == "es") {
+                frases = fraseDao.obtenerFrasesSinPanelFinalEsp()
+            } else if (idioma == "en") {
+                frases = fraseDao.obtenerFrasesSinPanelFinalEng()
+            } else{
+                frases = fraseDao.obtenerFrasesSinPanelFinalEsp()
+            }
             withContext(Dispatchers.Main) {
                 if (frases.isNotEmpty()) {
                     val aleatorio = Random.nextInt(0, frases.size)

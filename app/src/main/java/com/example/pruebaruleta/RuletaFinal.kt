@@ -18,6 +18,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Locale
 import kotlin.random.Random
 
 class RuletaFinal : AppCompatActivity() {
@@ -48,6 +49,7 @@ class RuletaFinal : AppCompatActivity() {
     private  var longitudFrase=0
     private  var letrasLevantadas=0
     private var mediaPlayer: MediaPlayer? = null
+    private var idioma = Locale.getDefault().language
 
 
 
@@ -116,7 +118,13 @@ class RuletaFinal : AppCompatActivity() {
             inicializarJugadores(jugadorFinal)
         }
         CoroutineScope(Dispatchers.IO).launch {
-            frases = fraseDao.obtenerFrasesPanelFinal()
+            if (idioma == "es") {
+                frases = fraseDao.obtenerFrasesPanelFinalEsp()
+            } else if (idioma == "en") {
+                frases = fraseDao.obtenerFrasesPanelFinalEng()
+            } else{
+                frases = fraseDao.obtenerFrasesPanelFinalEsp()
+            }
             withContext(Dispatchers.Main) {
                 if (frases.isNotEmpty()) {
                     val aleatorio = Random.nextInt(0, frases.size)

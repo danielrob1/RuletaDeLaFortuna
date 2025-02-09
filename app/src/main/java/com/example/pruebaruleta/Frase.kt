@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class Frase(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val categoria: String,
-    val frase: String
+    val frase: String,
+    val idioma:String
 )
