@@ -39,7 +39,7 @@ class RuletaFinal : AppCompatActivity() {
     private var anguloResultado = 0
     private var resultado = ""
     private var ruletaGirada = false
-    private var sectores = listOf(50,60,70,1,0,10,20,30,40,50,60,70,10,20,30,40)
+    private var sectores = listOf(8000,1000,2000,3000,4000,5000,6000,7000,8000,1000,2000,3000,4000,5000,6000,7000)
     private var sectoresAngulos= IntArray(sectores.size)
     private var grados = 0
     private lateinit var frases: List<Frase>
@@ -136,9 +136,6 @@ class RuletaFinal : AppCompatActivity() {
 
 
     var letrasIniciales = listOf('R','S','F','O')
-
-
-
     private fun girarRuleta() {
         btnGirar.isEnabled = false
         val random = Random.Default
@@ -207,11 +204,7 @@ class RuletaFinal : AppCompatActivity() {
     }
     // Función que devuelve el resultado según el ángulo final
     private fun obtenerResultado(angulo: Int): String {
-        return when {
-            angulo == 0 -> "Jackpot"
-            angulo == 1 ->"Jackpot"
-            else -> angulo.toString()
-        }
+        return angulo.toString()
     }
 
     /**
@@ -254,9 +247,6 @@ class RuletaFinal : AppCompatActivity() {
         finish() // Cierra la actividad actual
     }
     private fun mostrarResultado(resultado: String) {
-        if(resultado=="Jackpot"){
-            verificarLetra(' ')
-        }
         Toast.makeText(this, "¡Resultado: $resultado!", Toast.LENGTH_SHORT).show()
     }
 

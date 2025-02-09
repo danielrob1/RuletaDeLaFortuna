@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fraseSinEspacios: String
     private  var longitudFrase=0
     private  var letrasLevantadas=0
-    private var sectores = listOf(50,60,70,1,0,10,20,30,40,50,60,70,10,20,30,40)
+    private var sectores = listOf(40,50,60,70,0,10,20,30,40,50,60,70,0,10,20,30)
     private var sectoresAngulos= IntArray(sectores.size)
     private var grados = 0
     private var mediaPlayer: MediaPlayer? = null
@@ -162,8 +162,7 @@ class MainActivity : AppCompatActivity() {
     }
     private fun obtenerResultado(angulo: Int): String {
         return when {
-           angulo == 0 -> "Jackpot"
-            angulo == 1 ->"Jackpot"
+           angulo == 0 -> "Paso"
             else -> angulo.toString()
         }
     }
@@ -201,10 +200,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun mostrarResultado(resultado: String) {
-        if(resultado=="Jackpot"){
+        if(resultado=="Paso"){
             verificarLetra(' ')
+        }else{
+            Toast.makeText(this, "¡Resultado: $resultado!", Toast.LENGTH_SHORT).show()
         }
-        Toast.makeText(this, "¡Resultado: $resultado!", Toast.LENGTH_SHORT).show()
+
     }
     private fun verificarLetra(letra: Char) {
         if (letrasDichas.contains(letra)) {
